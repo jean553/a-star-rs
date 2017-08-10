@@ -1,0 +1,9 @@
+language: rust
+rust:
+    - nightly
+
+before_script:
+    - cd a-star-rs/ 
+
+script:
+    - cargo test
