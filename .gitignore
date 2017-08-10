@@ -1,4 +1,4 @@
 Cargo.lock
-rust-a-star/target
+a-star-rs/target
 *.swp
 .vagrant
