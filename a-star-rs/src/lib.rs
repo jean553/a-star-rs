@@ -38,6 +38,8 @@ mod lib {
         width: u8,
         height: u8,
         nodes: Vec<Node>,
+        departure: usize,
+        arrival: usize,
     }
 
     impl Nodes {
@@ -55,6 +57,8 @@ mod lib {
         pub fn new(
             width: u8,
             height: u8,
+            departure: usize,
+            arrival: usize,
         ) -> Nodes {
 
             let mut nodes: Vec<Node> = Vec::new();
@@ -68,6 +72,8 @@ mod lib {
                 width: width,
                 height: height,
                 nodes: nodes,
+                departure: departure,
+                arrival: arrival,
             }
         }
 
