@@ -32,6 +32,18 @@ mod lib {
         ) {
             self.usuable = usuable;
         }
+
+        /// Sets the node heuristic.
+        ///
+        /// # Arguments:
+        ///
+        /// * `heuristic` - the heuristic to set
+        pub fn set_heuristic(
+            &mut self,
+            heuristic: u8,
+        ) {
+            self.heuristic = heuristic;
+        }
     }
 
     pub struct Nodes {
@@ -89,6 +101,29 @@ mod lib {
             usuable: bool,
         ) {
             self.nodes[index].set_is_usuable(usuable);
+        }
+
+        /// Generate the heuristics of every node
+        /// according to the departure and arrival indices.
+        pub fn generate_heuristics(&mut self) {
+
+            const NODES_PER_LINE: u8 = 5;
+            let index_x = (self.arrival as i8 % NODES_PER_LINE as i8) as i8;
+            let index_y = (self.arrival as i8 / NODES_PER_LINE as i8) as i8;
+
+            for (counter, node) in self.nodes.iter_mut().enumerate() {
+
+                let node_x = (counter as u8 % NODES_PER_LINE) as i8;
+                let node_y = (counter as u8 / NODES_PER_LINE) as i8;
+
+                /* rounded at the integer level */
+                let heuristic = (
+                    ((index_x - node_x) as f32).powi(2) +
+                    ((index_y - node_y) as f32).powi(2)
+                ).sqrt() as u8;
+
+                (*node).set_heuristic(heuristic);
+            }
         }
     }
 }
