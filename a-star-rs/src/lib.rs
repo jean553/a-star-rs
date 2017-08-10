@@ -4,6 +4,7 @@ mod lib {
 
     pub struct Node {
         heuristic: u8,
+        usuable: bool,
     }
 
     impl Node {
@@ -16,7 +17,20 @@ mod lib {
         pub fn new() -> Node {
             Node {
                 heuristic: 0,
+                usuable: true,
             }
+        }
+
+        /// Sets if the node is usuable or not.
+        ///
+        /// # Arguments:
+        ///
+        /// * `usuable` - true if the node is usuable
+        pub fn set_is_usuable(
+            &mut self,
+            usuable: bool,
+        ) {
+            self.usuable = usuable;
         }
     }
 
@@ -55,6 +69,20 @@ mod lib {
                 height: height,
                 nodes: nodes,
             }
+        }
+
+        /// Specifies usuable nodes.
+        ///
+        /// # Arguments:
+        ///
+        /// * `index` - the index of the node to set
+        /// * `usuable` - is the node usuable or not
+        pub fn set_node_usuable(
+            &mut self,
+            index: usize,
+            usuable: bool,
+        ) {
+            self.nodes[index].set_is_usuable(usuable);
         }
     }
 }
