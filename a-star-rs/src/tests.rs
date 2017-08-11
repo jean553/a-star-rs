@@ -22,5 +22,7 @@ mod tests {
             FIRST_INDEX,
             false,
         );
+
+        nodes.generate_heuristics();
     }
 }
