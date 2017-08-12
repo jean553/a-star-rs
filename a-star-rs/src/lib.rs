@@ -27,6 +27,25 @@ mod lib {
         );
     }
 
+    /// Returns the index according to the horizontal and vertical positions.
+    ///
+    /// # Arguments:
+    ///
+    /// * `horizontal_position` - the horizontal position
+    /// * `vertical_position` - the vertical position
+    /// * `width` - nodes per line
+    ///
+    /// # Returns:
+    ///
+    /// the index
+    fn get_index_from_positions(
+        horizontal_position: u8,
+        vertical_position: u8,
+        width: u8,
+    ) -> u8 {
+        (vertical_position * width) + horizontal_position
+    }
+
     impl Node {
 
         /// Constructor for a new Node object.
@@ -204,30 +223,84 @@ mod lib {
                 self.width,
             );
 
-            let node_at_right_border =
-                if horizontal_position == self.width - 1 {
-                    true
-                } else {
-                    false
-                };
+            if horizontal_position != 0 {
+                children.push(
+                    get_index_from_positions(
+                        horizontal_position - 1,
+                        vertical_position,
+                        self.width,
+                    )
+                );
+            }
 
-            let node_at_bottom_border =
-                if vertical_position == self.height - 1 {
-                    true
-                } else {
-                    false
-                };
+            if horizontal_position != self.width - 1 {
+                children.push(
+                    get_index_from_positions(
+                        horizontal_position + 1,
+                        vertical_position,
+                        self.width,
+                    )
+                );
+            }
 
-            if !node_at_right_border {
-                children.push(horizontal_position + 1);
+            if vertical_position != 0 {
+                children.push(
+                    get_index_from_positions(
+                        horizontal_position,
+                        vertical_position - 1,
+                        self.width,
+                    )
+                );
 
-                if !node_at_bottom_border {
-                    children.push(vertical_position + self.width + 1);
+                if horizontal_position != self.width - 1 {
+                    children.push(
+                        get_index_from_positions(
+                            horizontal_position + 1,
+                            vertical_position - 1,
+                            self.width,
+                        )
+                    );
+                }
+
+                if horizontal_position != 0 {
+                    children.push(
+                        get_index_from_positions(
+                            horizontal_position - 1,
+                            vertical_position - 1,
+                            self.width,
+                        )
+                    );
                 }
             }
 
             if vertical_position != self.height - 1 {
-                children.push(vertical_position + self.width);
+                children.push(
+                    get_index_from_positions(
+                        horizontal_position,
+                        vertical_position + 1,
+                        self.width,
+                    )
+                );
+
+                if horizontal_position != self.width - 1 {
+                    children.push(
+                        get_index_from_positions(
+                            horizontal_position + 1,
+                            vertical_position + 1,
+                            self.width,
+                        )
+                    );
+                }
+
+                if horizontal_position != 0 {
+                    children.push(
+                        get_index_from_positions(
+                            horizontal_position - 1,
+                            vertical_position + 1,
+                            self.width,
+                        )
+                    );
+                }
             }
 
             self.open_list = children;

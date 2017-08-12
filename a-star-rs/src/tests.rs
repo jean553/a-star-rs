@@ -65,13 +65,23 @@ mod tests {
 
         const FIRST_INDEX: u8 = 0;
         nodes.generate_children_list(FIRST_INDEX);
-
         let mut children = nodes.get_children_open_list();
         children.sort_by(|a, b| a.cmp(b));
 
         assert_eq!(
             children,
             [1, 10, 11],
+            "unexpected children",
+        );
+
+        const SECOND_INDEX: u8 = 1;
+        nodes.generate_children_list(SECOND_INDEX);
+        let mut children = nodes.get_children_open_list();
+        children.sort_by(|a, b| a.cmp(b));
+
+        assert_eq!(
+            children,
+            [0, 2, 10, 11, 12],
             "unexpected children",
         );
     }
