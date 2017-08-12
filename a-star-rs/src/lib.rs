@@ -116,14 +116,13 @@ mod lib {
         /// according to the departure and arrival indices.
         pub fn generate_heuristics(&mut self) {
 
-            const NODES_PER_LINE: u8 = 5;
-            let index_x = (self.arrival as i8 % NODES_PER_LINE as i8) as i8;
-            let index_y = (self.arrival as i8 / NODES_PER_LINE as i8) as i8;
+            let index_x = (self.arrival as i8 % self.width as i8) as i8;
+            let index_y = (self.arrival as i8 / self.width as i8) as i8;
 
             for (counter, node) in self.nodes.iter_mut().enumerate() {
 
-                let node_x = (counter as u8 % NODES_PER_LINE) as i8;
-                let node_y = (counter as u8 / NODES_PER_LINE) as i8;
+                let node_x = (counter as u8 % self.width) as i8;
+                let node_y = (counter as u8 / self.width) as i8;
 
                 /* rounded at the integer level */
                 let heuristic = (
