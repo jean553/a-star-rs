@@ -138,18 +138,28 @@ mod lib {
         /// according to the departure and arrival indices.
         pub fn generate_heuristics(&mut self) {
 
-            let index_x = (self.arrival as i8 % self.width as i8) as i8;
-            let index_y = (self.arrival as i8 / self.width as i8) as i8;
+            let (
+                index_x,
+                index_y,
+            ) = get_positions(
+                self.arrival as u8,
+                self.width,
+            );
 
             for (counter, node) in self.nodes.iter_mut().enumerate() {
 
-                let node_x = (counter as u8 % self.width) as i8;
-                let node_y = (counter as u8 / self.width) as i8;
+                let (
+                    node_x,
+                    node_y,
+                ) = get_positions(
+                    counter as u8,
+                    self.width,
+                );
 
                 /* rounded at the integer level */
                 let heuristic = (
-                    ((index_x - node_x) as f32).powi(2) +
-                    ((index_y - node_y) as f32).powi(2)
+                    ((index_x as i8 - node_x as i8) as f32).powi(2) +
+                    ((index_y as i8 - node_y as i8) as f32).powi(2)
                 ).sqrt() as u8;
 
                 (*node).set_heuristic(heuristic);
@@ -181,13 +191,18 @@ mod lib {
         /// TODO: partially implemented
         pub fn generate_children_list(
             &mut self,
-            index: usize,
+            index: u8,
         ) {
 
             let mut children: Vec<u8> = Vec::new();
 
-            let node_x = (index as u8 % self.width) as i8;
-            let node_y = (index as u8 / self.width) as i8;
+            let (
+                horizontal_position,
+                vertical_position,
+            ) = get_positions(
+                index,
+                self.width,
+            );
         }
     }
 }
