@@ -4,6 +4,7 @@ mod lib {
 
     pub struct Node {
         heuristic: u8,
+        cost: u8,
         usuable: bool,
     }
 
@@ -56,6 +57,7 @@ mod lib {
         pub fn new() -> Node {
             Node {
                 heuristic: 0,
+                cost: 0,
                 usuable: true,
             }
         }
@@ -91,6 +93,27 @@ mod lib {
         /// the node heuristic
         pub fn get_heuristic(&self) -> u8 {
             self.heuristic
+        }
+
+        /// Sets the cost.
+        ///
+        /// # Arguments:
+        ///
+        /// * `cost` - the cost to set
+        pub fn set_cost(
+            &mut self,
+            cost: u8,
+        ) {
+            self.cost = cost;
+        }
+
+        /// Getter of the cost.
+        ///
+        /// # Returns:
+        ///
+        /// the node movement cost
+        pub fn get_cost(&self) -> u8 {
+            self.cost
         }
     }
 
@@ -199,6 +222,22 @@ mod lib {
             index: usize,
         ) -> u8 {
             self.nodes[index].get_heuristic()
+        }
+
+        /// Returns the cost of a node.
+        ///
+        /// # Arguments:
+        ///
+        /// * `index` - index of the concerned node
+        ///
+        /// # Returns:
+        ///
+        /// cost of the node
+        pub fn get_node_cost(
+            &self,
+            index: usize,
+        ) -> u8 {
+            self.nodes[index].get_cost()
         }
 
         /// Generates the open list of children for the given node.
@@ -313,6 +352,31 @@ mod lib {
         /// vector that contains the indeces of all the children
         pub fn get_children_open_list(&self) -> Vec<u8> {
             self.open_list.clone()
+        }
+
+        /// Generates the costs of the children of the open list
+        pub fn generate_costs(&mut self) {
+
+            let signed_departure = self.departure as i8;
+
+            for index in self.open_list.iter() {
+
+                let signed_index = *index as i8;
+                let node = &mut self.nodes[*index as usize];
+
+                if signed_index == signed_departure - 1 ||
+                    signed_index == signed_departure + 1 ||
+                    signed_index == signed_departure - 10 ||
+                    signed_index == signed_departure + 10 {
+
+                    const HORIZONTAL_OR_VERTICAL_MOVE: u8 = 10;
+                    node.set_cost(HORIZONTAL_OR_VERTICAL_MOVE);
+                    continue;
+                }
+
+                const DIAGONAL_MOVE: u8 = 14;
+                node.set_cost(DIAGONAL_MOVE);
+            }
         }
     }
 }
