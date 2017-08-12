@@ -84,5 +84,38 @@ mod tests {
             [0, 2, 10, 11, 12],
             "unexpected children",
         );
+
+        const THIRD_INDEX: u8 = 15;
+        nodes.generate_children_list(THIRD_INDEX);
+        let mut children = nodes.get_children_open_list();
+        children.sort_by(|a, b| a.cmp(b));
+
+        assert_eq!(
+            children,
+            [4, 5, 6, 14, 16, 24, 25, 26],
+            "unexpected children",
+        );
+
+        const FOURTH_INDEX: u8 = 95;
+        nodes.generate_children_list(FOURTH_INDEX);
+        let mut children = nodes.get_children_open_list();
+        children.sort_by(|a, b| a.cmp(b));
+
+        assert_eq!(
+            children,
+            [84, 85, 86, 94, 96],
+            "unexpected children",
+        );
+
+        const FIFTH_INDEX: u8 = 99;
+        nodes.generate_children_list(FIFTH_INDEX);
+        let mut children = nodes.get_children_open_list();
+        children.sort_by(|a, b| a.cmp(b));
+
+        assert_eq!(
+            children,
+            [88, 89, 98],
+            "unexpected children",
+        );
     }
 }
