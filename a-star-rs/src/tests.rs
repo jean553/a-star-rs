@@ -118,4 +118,47 @@ mod tests {
             "unexpected children",
         );
     }
+
+    #[test]
+    fn test_generated_costs() {
+
+        const WIDTH: u8 = 10;
+        const HEIGHT: u8 = 10;
+        const DEPARTURE_INDEX: usize = 0;
+        const ARRIVAL_INDEX: usize = 10;
+        let mut nodes = Nodes::new(
+            WIDTH,
+            HEIGHT,
+            DEPARTURE_INDEX,
+            ARRIVAL_INDEX,
+        );
+
+        const FIRST_INDEX: u8 = 0;
+        nodes.generate_children_list(FIRST_INDEX);
+        nodes.generate_costs();
+
+        assert_eq!(
+            nodes.get_node_cost(0),
+            0,
+            "unexpected cost",
+        );
+
+        assert_eq!(
+            nodes.get_node_cost(1),
+            10,
+            "unexpected cost",
+        );
+
+        assert_eq!(
+            nodes.get_node_cost(10),
+            10,
+            "unexpected cost",
+        );
+
+        assert_eq!(
+            nodes.get_node_cost(11),
+            14,
+            "unexpected cost",
+        );
+    }
 }
