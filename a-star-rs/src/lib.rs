@@ -224,6 +224,22 @@ mod lib {
             self.nodes[index].get_heuristic()
         }
 
+        /// Returns the cost of a node.
+        ///
+        /// # Arguments:
+        ///
+        /// * `index` - index of the concerned node
+        ///
+        /// # Returns:
+        ///
+        /// cost of the node
+        pub fn get_node_cost(
+            &self,
+            index: usize,
+        ) -> u8 {
+            self.nodes[index].get_cost()
+        }
+
         /// Generates the open list of children for the given node.
         ///
         /// # Arguments:
