@@ -44,6 +44,15 @@ mod lib {
         ) {
             self.heuristic = heuristic;
         }
+
+        /// Returns the node heuristic.
+        ///
+        /// # Returns:
+        ///
+        /// the node heuristic
+        pub fn get_heuristic(&self) -> u8 {
+            self.heuristic
+        }
     }
 
     pub struct Nodes {
@@ -124,6 +133,22 @@ mod lib {
 
                 (*node).set_heuristic(heuristic);
             }
+        }
+
+        /// Returns the heuristic of the given node.
+        ///
+        /// # Arguments:
+        ///
+        /// * `index` - index of the concerned node
+        ///
+        /// # Returns:
+        ///
+        /// heuristic of the node
+        pub fn get_node_heuristic(
+            &self,
+            index: usize,
+        ) -> u8 {
+            self.nodes[index].get_heuristic()
         }
     }
 }
