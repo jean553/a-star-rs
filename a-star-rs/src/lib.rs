@@ -4,6 +4,7 @@ mod lib {
 
     pub struct Node {
         heuristic: u8,
+        cost: u8,
         usuable: bool,
     }
 
@@ -56,6 +57,7 @@ mod lib {
         pub fn new() -> Node {
             Node {
                 heuristic: 0,
+                cost: 0,
                 usuable: true,
             }
         }
