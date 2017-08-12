@@ -7,6 +7,26 @@ mod lib {
         usuable: bool,
     }
 
+    /// Returns the horizontal and vertical position for the given index.
+    ///
+    /// # Arguments:
+    ///
+    /// * `index` - the source index
+    /// * `width` - number of nodes per line
+    ///
+    /// # Returns:
+    ///
+    /// tuple that contains the horizontal and vertical positions
+    fn get_positions(
+        index: u8,
+        width: u8,
+    ) -> (u8, u8) {
+        return (
+            index % width,
+            index / width,
+        );
+    }
+
     impl Node {
 
         /// Constructor for a new Node object.
