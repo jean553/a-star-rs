@@ -151,6 +151,24 @@ mod lib {
         ) -> u8 {
             self.nodes[index].get_heuristic()
         }
+
+        /// Generates the open list of children for the given node.
+        ///
+        /// # Arguments:
+        ///
+        /// * `index` - index of the parent node for the generated list
+        ///
+        /// TODO: partially implemented
+        pub fn generate_children_list(
+            &mut self,
+            index: usize,
+        ) {
+
+            let mut children: Vec<u8> = Vec::new();
+
+            let node_x = (index as u8 % self.width) as i8;
+            let node_y = (index as u8 / self.width) as i8;
+        }
     }
 }
 
