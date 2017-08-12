@@ -29,7 +29,7 @@ mod tests {
         assert_eq!(
             nodes.get_node_heuristic(FIRST_INDEX),
             FIRST_INDEX_EXPECTED_HEURISTIC,
-            "Unexpected heuristic."
+            "Unexpected heuristic.",
         );
 
         const SECOND_INDEX: usize = 2;
@@ -37,7 +37,7 @@ mod tests {
         assert_eq!(
             nodes.get_node_heuristic(SECOND_INDEX),
             SECOND_INDEX_EXPECTED_HEURISTIC,
-            "Unexpected heuristic."
+            "Unexpected heuristic.",
         );
 
         const LAST_INDEX: usize = 99;
@@ -45,7 +45,34 @@ mod tests {
         assert_eq!(
             nodes.get_node_heuristic(LAST_INDEX),
             LAST_INDEX_EXPECTED_HEURISTIC,
-            "Unexpected heuristic."
+            "Unexpected heuristic.",
+        );
+    }
+
+    #[test]
+    fn test_generated_children_open_list() {
+
+        const WIDTH: u8 = 10;
+        const HEIGHT: u8 = 10;
+        const DEPARTURE_INDEX: usize = 0;
+        const ARRIVAL_INDEX: usize = 10;
+        let mut nodes = Nodes::new(
+            WIDTH,
+            HEIGHT,
+            DEPARTURE_INDEX,
+            ARRIVAL_INDEX,
+        );
+
+        const FIRST_INDEX: u8 = 0;
+        nodes.generate_children_list(FIRST_INDEX);
+
+        let mut children = nodes.get_children_open_list();
+        children.sort_by(|a, b| a.cmp(b));
+
+        assert_eq!(
+            children,
+            [1, 10, 11],
+            "unexpected children",
         );
     }
 }

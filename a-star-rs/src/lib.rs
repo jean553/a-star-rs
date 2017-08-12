@@ -203,6 +203,43 @@ mod lib {
                 index,
                 self.width,
             );
+
+            let node_at_right_border =
+                if horizontal_position == self.width - 1 {
+                    true
+                } else {
+                    false
+                };
+
+            let node_at_bottom_border =
+                if vertical_position == self.height - 1 {
+                    true
+                } else {
+                    false
+                };
+
+            if !node_at_right_border {
+                children.push(horizontal_position + 1);
+
+                if !node_at_bottom_border {
+                    children.push(vertical_position + self.width + 1);
+                }
+            }
+
+            if vertical_position != self.height - 1 {
+                children.push(vertical_position + self.width);
+            }
+
+            self.open_list = children;
+        }
+
+        /// Returns the children open list.
+        ///
+        /// # Returns:
+        ///
+        /// vector that contains the indeces of all the children
+        pub fn get_children_open_list(&self) -> Vec<u8> {
+            self.open_list.clone()
         }
     }
 }
