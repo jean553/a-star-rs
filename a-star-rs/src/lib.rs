@@ -61,6 +61,7 @@ mod lib {
         nodes: Vec<Node>,
         departure: usize,
         arrival: usize,
+        open_list: Vec<u8>,
     }
 
     impl Nodes {
@@ -95,6 +96,7 @@ mod lib {
                 nodes: nodes,
                 departure: departure,
                 arrival: arrival,
+                open_list: Vec::new(),
             }
         }
 
