@@ -397,6 +397,35 @@ mod lib {
         pub fn get_closed_list(&self) -> Vec<usize> {
             self.closed_list.clone()
         }
+
+        /// Iterate the research to the next node
+        pub fn iterate(&mut self) {
+
+            let mut minimum: u8 = <u8>::max_value();
+            let mut target: usize = 0;
+
+            for index in self.open_list.iter() {
+
+                let node = &self.nodes[*index];
+                let value = node.heuristic + node.cost;
+
+                if value < minimum {
+                    minimum = value;
+                    target = *index;
+                }
+            }
+
+            self.current = target;
+        }
+
+        /// Getter for the current index
+        ///
+        /// # Returns:
+        ///
+        /// the current index
+        pub fn get_current(&self) -> usize {
+            self.current
+        }
     }
 }
 
