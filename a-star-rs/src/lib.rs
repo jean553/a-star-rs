@@ -1,6 +1,9 @@
+#![feature(vec_remove_item)]
+
 /// we allow dead code to prevent warnings saying the functions are not used
 #[allow(dead_code)]
 mod lib {
+
 
     pub struct Node {
         heuristic: u8,
@@ -398,7 +401,8 @@ mod lib {
             self.closed_list.clone()
         }
 
-        /// Iterate the research to the next node
+        /// Iterate the research to the next node,
+        /// remove the target from the open list
         pub fn iterate(&mut self) {
 
             let mut minimum: u8 = <u8>::max_value();
@@ -416,6 +420,7 @@ mod lib {
             }
 
             self.current = target;
+            self.open_list.remove_item(&target);
         }
 
         /// Getter for the current index
