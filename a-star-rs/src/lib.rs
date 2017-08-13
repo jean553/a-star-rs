@@ -163,7 +163,7 @@ mod lib {
                 current: departure,
                 arrival: arrival,
                 open_list: Vec::new(),
-                closed_list: Vec::new(),
+                closed_list: vec![departure],
             }
         }
 
@@ -387,11 +387,6 @@ mod lib {
             }
         }
 
-        /// Adds the current index into the closed list
-        pub fn update_closed_list(&mut self) {
-            self.closed_list.push(self.current);
-        }
-
         /// Getter for the closed list
         ///
         /// # Returns:
@@ -421,6 +416,7 @@ mod lib {
 
             self.current = target;
             self.open_list.remove_item(&target);
+            self.closed_list.push(target);
         }
 
         /// Getter for the current index
