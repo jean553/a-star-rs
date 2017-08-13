@@ -383,6 +383,20 @@ mod lib {
                 node.set_cost(DIAGONAL_MOVE);
             }
         }
+
+        /// Adds the current index into the closed list
+        pub fn update_closed_list(&mut self) {
+            self.closed_list.push(self.current);
+        }
+
+        /// Getter for the closed list
+        ///
+        /// # Returns:
+        ///
+        /// vector containing the closed list
+        pub fn get_closed_list(&self) -> Vec<usize> {
+            self.closed_list.clone()
+        }
     }
 }
 
