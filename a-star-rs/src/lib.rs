@@ -364,7 +364,7 @@ mod lib {
             for index in self.open_list.iter() {
 
                 let signed_index = *index as i8;
-                let node = &mut self.nodes[*index as usize];
+                let node = &mut self.nodes[*index];
 
                 const HORIZONTAL_MOVE: i8 = 1;
                 const VERTICAL_MOVE: i8 = 10;
