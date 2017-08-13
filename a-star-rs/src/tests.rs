@@ -161,4 +161,44 @@ mod tests {
             "unexpected cost",
         );
     }
+
+    #[test]
+    fn test_update_closed_list() {
+
+        const WIDTH: u8 = 10;
+        const HEIGHT: u8 = 10;
+        const FIRST_DEPARTURE_INDEX: usize = 0;
+        const FIRST_ARRIVAL_INDEX: usize = 10;
+        let mut nodes = Nodes::new(
+            WIDTH,
+            HEIGHT,
+            FIRST_DEPARTURE_INDEX,
+            FIRST_ARRIVAL_INDEX,
+        );
+
+        nodes.update_closed_list();
+
+        assert_eq!(
+            nodes.get_closed_list(),
+            [0],
+            "unexpected closed list",
+        );
+
+        const SECOND_DEPARTURE_INDEX: usize = 25;
+        const SECOND_ARRIVAL_INDEX: usize = 10;
+        let mut nodes = Nodes::new(
+            WIDTH,
+            HEIGHT,
+            SECOND_DEPARTURE_INDEX,
+            SECOND_ARRIVAL_INDEX,
+        );
+
+        nodes.update_closed_list();
+
+        assert_eq!(
+            nodes.get_closed_list(),
+            [25],
+            "unexpected closed list",
+        );
+    }
 }
