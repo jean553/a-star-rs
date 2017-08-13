@@ -121,7 +121,7 @@ mod lib {
         width: u8,
         height: u8,
         nodes: Vec<Node>,
-        departure: usize,
+        current: usize,
         arrival: usize,
         open_list: Vec<u8>,
     }
@@ -156,7 +156,7 @@ mod lib {
                 width: width,
                 height: height,
                 nodes: nodes,
-                departure: departure,
+                current: departure,
                 arrival: arrival,
                 open_list: Vec::new(),
             }
@@ -357,7 +357,7 @@ mod lib {
         /// Generates the costs of the children of the open list
         pub fn generate_costs(&mut self) {
 
-            let signed_departure = self.departure as i8;
+            let signed_departure = self.current as i8;
 
             for index in self.open_list.iter() {
 
