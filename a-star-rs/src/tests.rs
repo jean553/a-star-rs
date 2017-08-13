@@ -17,6 +17,12 @@ mod tests {
             ARRIVAL_INDEX,
         );
 
+        assert_eq!(
+            nodes.get_closed_list(),
+            [0],
+            "unexpected closed list",
+        );
+
         const FIRST_INDEX: usize = 0;
         nodes.set_node_usuable(
             FIRST_INDEX,
@@ -163,46 +169,6 @@ mod tests {
     }
 
     #[test]
-    fn test_update_closed_list() {
-
-        const WIDTH: u8 = 10;
-        const HEIGHT: u8 = 10;
-        const FIRST_DEPARTURE_INDEX: usize = 0;
-        const FIRST_ARRIVAL_INDEX: usize = 10;
-        let mut nodes = Nodes::new(
-            WIDTH,
-            HEIGHT,
-            FIRST_DEPARTURE_INDEX,
-            FIRST_ARRIVAL_INDEX,
-        );
-
-        nodes.update_closed_list();
-
-        assert_eq!(
-            nodes.get_closed_list(),
-            [0],
-            "unexpected closed list",
-        );
-
-        const SECOND_DEPARTURE_INDEX: usize = 25;
-        const SECOND_ARRIVAL_INDEX: usize = 10;
-        let mut nodes = Nodes::new(
-            WIDTH,
-            HEIGHT,
-            SECOND_DEPARTURE_INDEX,
-            SECOND_ARRIVAL_INDEX,
-        );
-
-        nodes.update_closed_list();
-
-        assert_eq!(
-            nodes.get_closed_list(),
-            [25],
-            "unexpected closed list",
-        );
-    }
-
-    #[test]
     fn test_iterate() {
 
         const WIDTH: u8 = 10;
@@ -219,7 +185,6 @@ mod tests {
         nodes.generate_heuristics();
         nodes.generate_children_list(FIRST_DEPARTURE_INDEX as u8);
         nodes.generate_costs();
-        nodes.update_closed_list();
 
         assert_eq!(
             nodes.get_children_open_list(),
@@ -234,8 +199,6 @@ mod tests {
             1,
             "unexpected current",
         );
-
-        nodes.update_closed_list();
 
         assert_eq!(
             nodes.get_closed_list(),
