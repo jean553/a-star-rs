@@ -201,4 +201,31 @@ mod tests {
             "unexpected closed list",
         );
     }
+
+    #[test]
+    fn test_iterate() {
+
+        const WIDTH: u8 = 10;
+        const HEIGHT: u8 = 10;
+        const FIRST_DEPARTURE_INDEX: usize = 0;
+        const FIRST_ARRIVAL_INDEX: usize = 25;
+        let mut nodes = Nodes::new(
+            WIDTH,
+            HEIGHT,
+            FIRST_DEPARTURE_INDEX,
+            FIRST_ARRIVAL_INDEX,
+        );
+
+        nodes.generate_heuristics();
+        nodes.generate_children_list(FIRST_DEPARTURE_INDEX as u8);
+        nodes.generate_costs();
+        nodes.update_closed_list();
+        nodes.iterate();
+
+        assert_eq!(
+            nodes.get_current(),
+            1,
+            "unexpected current",
+        );
+    }
 }
