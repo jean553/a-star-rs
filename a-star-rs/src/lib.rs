@@ -364,7 +364,7 @@ mod lib {
             for index in self.open_list.iter() {
 
                 let signed_index = *index as i8;
-                let node = &mut self.nodes[*index as usize];
+                let node = &mut self.nodes[*index];
 
                 const HORIZONTAL_MOVE: i8 = 1;
                 const VERTICAL_MOVE: i8 = 10;
@@ -396,6 +396,35 @@ mod lib {
         /// vector containing the closed list
         pub fn get_closed_list(&self) -> Vec<usize> {
             self.closed_list.clone()
+        }
+
+        /// Iterate the research to the next node
+        pub fn iterate(&mut self) {
+
+            let mut minimum: u8 = <u8>::max_value();
+            let mut target: usize = 0;
+
+            for index in self.open_list.iter() {
+
+                let node = &self.nodes[*index];
+                let value = node.heuristic + node.cost;
+
+                if value < minimum {
+                    minimum = value;
+                    target = *index;
+                }
+            }
+
+            self.current = target;
+        }
+
+        /// Getter for the current index
+        ///
+        /// # Returns:
+        ///
+        /// the current index
+        pub fn get_current(&self) -> usize {
+            self.current
         }
     }
 }
