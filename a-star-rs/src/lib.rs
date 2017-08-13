@@ -43,8 +43,8 @@ mod lib {
         horizontal_position: u8,
         vertical_position: u8,
         width: u8,
-    ) -> u8 {
-        (vertical_position * width) + horizontal_position
+    ) -> usize {
+        ((vertical_position * width) + horizontal_position) as usize
     }
 
     impl Node {
@@ -123,7 +123,7 @@ mod lib {
         nodes: Vec<Node>,
         current: usize,
         arrival: usize,
-        open_list: Vec<u8>,
+        open_list: Vec<usize>,
         closed_list: Vec<usize>,
     }
 
@@ -254,7 +254,7 @@ mod lib {
             index: u8,
         ) {
 
-            let mut children: Vec<u8> = Vec::new();
+            let mut children: Vec<usize> = Vec::new();
 
             let (
                 horizontal_position,
@@ -352,7 +352,7 @@ mod lib {
         /// # Returns:
         ///
         /// vector that contains the indeces of all the children
-        pub fn get_children_open_list(&self) -> Vec<u8> {
+        pub fn get_children_open_list(&self) -> Vec<usize> {
             self.open_list.clone()
         }
 
