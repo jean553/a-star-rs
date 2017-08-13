@@ -220,12 +220,33 @@ mod tests {
         nodes.generate_children_list(FIRST_DEPARTURE_INDEX as u8);
         nodes.generate_costs();
         nodes.update_closed_list();
+
+        assert_eq!(
+            nodes.get_children_open_list(),
+            [1, 10, 11],
+            "unexpected open list",
+        );
+
         nodes.iterate();
 
         assert_eq!(
             nodes.get_current(),
             1,
             "unexpected current",
+        );
+
+        nodes.update_closed_list();
+
+        assert_eq!(
+            nodes.get_closed_list(),
+            [0, 1],
+            "unexpected closed list",
+        );
+
+        assert_eq!(
+            nodes.get_children_open_list(),
+            [10, 11],
+            "unexpected open list",
         );
     }
 }
