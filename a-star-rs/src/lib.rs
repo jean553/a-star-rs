@@ -124,6 +124,7 @@ mod lib {
         current: usize,
         arrival: usize,
         open_list: Vec<u8>,
+        closed_list: Vec<usize>,
     }
 
     impl Nodes {
@@ -159,6 +160,7 @@ mod lib {
                 current: departure,
                 arrival: arrival,
                 open_list: Vec::new(),
+                closed_list: Vec::new(),
             }
         }
 
