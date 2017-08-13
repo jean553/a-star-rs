@@ -364,10 +364,13 @@ mod lib {
                 let signed_index = *index as i8;
                 let node = &mut self.nodes[*index as usize];
 
-                if signed_index == signed_departure - 1 ||
-                    signed_index == signed_departure + 1 ||
-                    signed_index == signed_departure - 10 ||
-                    signed_index == signed_departure + 10 {
+                const HORIZONTAL_MOVE: i8 = 1;
+                const VERTICAL_MOVE: i8 = 10;
+
+                if signed_index == signed_departure - HORIZONTAL_MOVE ||
+                    signed_index == signed_departure + HORIZONTAL_MOVE ||
+                    signed_index == signed_departure - VERTICAL_MOVE ||
+                    signed_index == signed_departure + VERTICAL_MOVE {
 
                     const HORIZONTAL_OR_VERTICAL_MOVE: u8 = 10;
                     node.set_cost(HORIZONTAL_OR_VERTICAL_MOVE);
