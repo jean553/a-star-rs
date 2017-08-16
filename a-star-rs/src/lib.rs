@@ -248,15 +248,9 @@ mod lib {
             self.nodes[index].get_cost()
         }
 
-        /// Generates the open list of children for the given node.
-        ///
-        /// # Arguments:
-        ///
-        /// * `index` - index of the parent node for the generated list
-        pub fn generate_children_list(
-            &mut self,
-            index: u8,
-        ) {
+        /// Generates the open list of children for the given node
+        /// for the current index.
+        pub fn generate_children_list(&mut self) {
 
             let mut children: Vec<usize> = Vec::new();
 
@@ -427,6 +421,18 @@ mod lib {
         /// the current index
         pub fn get_current(&self) -> usize {
             self.current
+        }
+
+        /// Setter of the current index
+        ///
+        /// # Arguments:
+        ///
+        /// `index` - the current index
+        pub fn set_current(
+            &mut self,
+            current: usize,
+        ) {
+            self.current = current;
         }
     }
 }
