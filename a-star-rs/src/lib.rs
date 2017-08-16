@@ -22,9 +22,12 @@ mod lib {
     ///
     /// tuple that contains the horizontal and vertical positions
     fn get_positions(
-        index: u8,
+        index: usize,
         width: u8,
     ) -> (u8, u8) {
+
+        let index = index as u8;
+
         return (
             index % width,
             index / width,
@@ -189,7 +192,7 @@ mod lib {
                 index_x,
                 index_y,
             ) = get_positions(
-                self.arrival as u8,
+                self.arrival,
                 self.width,
             );
 
@@ -199,7 +202,7 @@ mod lib {
                     node_x,
                     node_y,
                 ) = get_positions(
-                    counter as u8,
+                    counter,
                     self.width,
                 );
 
@@ -261,7 +264,7 @@ mod lib {
                 horizontal_position,
                 vertical_position,
             ) = get_positions(
-                index,
+                self.current,
                 self.width,
             );
 
