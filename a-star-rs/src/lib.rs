@@ -250,8 +250,6 @@ mod lib {
         /// # Arguments:
         ///
         /// * `index` - index of the parent node for the generated list
-        ///
-        /// TODO: partially implemented
         pub fn generate_children_list(
             &mut self,
             index: u8,
