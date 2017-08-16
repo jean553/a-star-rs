@@ -22,9 +22,12 @@ mod lib {
     ///
     /// tuple that contains the horizontal and vertical positions
     fn get_positions(
-        index: u8,
+        index: usize,
         width: u8,
     ) -> (u8, u8) {
+
+        let index = index as u8;
+
         return (
             index % width,
             index / width,
@@ -189,7 +192,7 @@ mod lib {
                 index_x,
                 index_y,
             ) = get_positions(
-                self.arrival as u8,
+                self.arrival,
                 self.width,
             );
 
@@ -199,7 +202,7 @@ mod lib {
                     node_x,
                     node_y,
                 ) = get_positions(
-                    counter as u8,
+                    counter,
                     self.width,
                 );
 
@@ -245,15 +248,9 @@ mod lib {
             self.nodes[index].get_cost()
         }
 
-        /// Generates the open list of children for the given node.
-        ///
-        /// # Arguments:
-        ///
-        /// * `index` - index of the parent node for the generated list
-        pub fn generate_children_list(
-            &mut self,
-            index: u8,
-        ) {
+        /// Generates the open list of children for the given node
+        /// for the current index.
+        pub fn generate_children_list(&mut self) {
 
             let mut children: Vec<usize> = Vec::new();
 
@@ -261,7 +258,7 @@ mod lib {
                 horizontal_position,
                 vertical_position,
             ) = get_positions(
-                index,
+                self.current,
                 self.width,
             );
 
@@ -424,6 +421,18 @@ mod lib {
         /// the current index
         pub fn get_current(&self) -> usize {
             self.current
+        }
+
+        /// Setter of the current index
+        ///
+        /// # Arguments:
+        ///
+        /// `index` - the current index
+        pub fn set_current(
+            &mut self,
+            current: usize,
+        ) {
+            self.current = current;
         }
     }
 }
