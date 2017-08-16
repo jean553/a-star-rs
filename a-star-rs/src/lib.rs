@@ -350,7 +350,7 @@ mod lib {
         /// # Returns:
         ///
         /// vector that contains the indeces of all the children
-        pub fn get_children_open_list(&self) -> Vec<usize> {
+        pub fn get_open_list(&self) -> Vec<usize> {
             self.open_list.clone()
         }
 
