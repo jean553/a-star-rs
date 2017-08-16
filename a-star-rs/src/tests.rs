@@ -72,7 +72,7 @@ mod tests {
         const FIRST_INDEX: usize = 0;
         nodes.set_current(FIRST_INDEX);
         nodes.generate_children_list();
-        let mut children = nodes.get_children_open_list();
+        let mut children = nodes.get_open_list();
         children.sort_by(|a, b| a.cmp(b));
 
         assert_eq!(
@@ -84,7 +84,7 @@ mod tests {
         const SECOND_INDEX: usize = 1;
         nodes.set_current(SECOND_INDEX);
         nodes.generate_children_list();
-        let mut children = nodes.get_children_open_list();
+        let mut children = nodes.get_open_list();
         children.sort_by(|a, b| a.cmp(b));
 
         assert_eq!(
@@ -96,7 +96,7 @@ mod tests {
         const THIRD_INDEX: usize = 15;
         nodes.set_current(THIRD_INDEX);
         nodes.generate_children_list();
-        let mut children = nodes.get_children_open_list();
+        let mut children = nodes.get_open_list();
         children.sort_by(|a, b| a.cmp(b));
 
         assert_eq!(
@@ -108,7 +108,7 @@ mod tests {
         const FOURTH_INDEX: usize = 95;
         nodes.set_current(FOURTH_INDEX);
         nodes.generate_children_list();
-        let mut children = nodes.get_children_open_list();
+        let mut children = nodes.get_open_list();
         children.sort_by(|a, b| a.cmp(b));
 
         assert_eq!(
@@ -120,7 +120,7 @@ mod tests {
         const FIFTH_INDEX: usize = 99;
         nodes.set_current(FIFTH_INDEX);
         nodes.generate_children_list();
-        let mut children = nodes.get_children_open_list();
+        let mut children = nodes.get_open_list();
         children.sort_by(|a, b| a.cmp(b));
 
         assert_eq!(
@@ -191,7 +191,7 @@ mod tests {
         nodes.generate_costs();
 
         assert_eq!(
-            nodes.get_children_open_list(),
+            nodes.get_open_list(),
             [1, 10, 11],
             "unexpected open list",
         );
@@ -211,7 +211,7 @@ mod tests {
         );
 
         assert_eq!(
-            nodes.get_children_open_list(),
+            nodes.get_open_list(),
             [10, 11],
             "unexpected open list",
         );
