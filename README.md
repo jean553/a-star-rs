@@ -2,4 +2,24 @@
 
 # a-star-rs
 
-Library that implements A* algorithm research.
+Library that implements A-star algorithm.
+
+## Development
+
+Start the docker container.
+
+```bash
+vagrant up
+```
+
+Connect to the container.
+
+```bash
+vagrant ssh
+```
+
+Run tests.
+
+```bash
+cargo test
+```
