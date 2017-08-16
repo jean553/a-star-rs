@@ -438,6 +438,10 @@ mod lib {
         }
 
         /// Sets the open list as the children list
+        ///
+        /// TODO: partially implemented, the open list is not a copy
+        /// of the children list, the current code only works
+        /// for the first iteration
         pub fn update_open_list(&mut self) {
             self.open_list = self.children_list.clone();
         }
