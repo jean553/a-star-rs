@@ -241,5 +241,15 @@ mod tests {
             1,
             "unexpected current",
         );
+
+        nodes.generate_children_list();
+        nodes.generate_costs();
+        nodes.iterate();
+
+        assert_eq!(
+            nodes.get_current(),
+            2,
+            "unexpected current",
+        );
     }
 }
