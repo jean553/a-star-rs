@@ -131,6 +131,7 @@ mod lib {
         arrival: usize,
         open_list: Vec<usize>,
         closed_list: Vec<usize>,
+        children_list: Vec<usize>,
     }
 
     impl Nodes {
@@ -167,6 +168,7 @@ mod lib {
                 arrival: arrival,
                 open_list: Vec::new(),
                 closed_list: vec![departure],
+                children_list: Vec::new(),
             }
         }
 
@@ -342,7 +344,7 @@ mod lib {
                 }
             }
 
-            self.open_list = children;
+            self.children_list = children;
         }
 
         /// Returns the children open list.
