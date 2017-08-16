@@ -436,6 +436,11 @@ mod lib {
         ) {
             self.current = current;
         }
+
+        /// Sets the open list as the children list
+        pub fn update_open_list(&mut self) {
+            self.open_list = self.children_list.clone();
+        }
     }
 }
 
