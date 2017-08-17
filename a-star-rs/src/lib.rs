@@ -402,6 +402,10 @@ mod lib {
 
             for index in self.open_list.iter() {
 
+                if self.closed_list.contains(index) {
+                    continue;
+                }
+
                 let node = &self.nodes[*index];
                 let value = node.heuristic + node.cost;
 
