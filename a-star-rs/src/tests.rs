@@ -72,8 +72,7 @@ mod tests {
         const FIRST_INDEX: usize = 0;
         nodes.set_current(FIRST_INDEX);
         nodes.generate_children_list();
-        nodes.update_open_list();
-        let mut children = nodes.get_open_list();
+        let mut children = nodes.get_children_list();
         children.sort_by(|a, b| a.cmp(b));
 
         assert_eq!(
@@ -85,8 +84,7 @@ mod tests {
         const SECOND_INDEX: usize = 1;
         nodes.set_current(SECOND_INDEX);
         nodes.generate_children_list();
-        nodes.update_open_list();
-        let mut children = nodes.get_open_list();
+        let mut children = nodes.get_children_list();
         children.sort_by(|a, b| a.cmp(b));
 
         assert_eq!(
@@ -98,8 +96,7 @@ mod tests {
         const THIRD_INDEX: usize = 15;
         nodes.set_current(THIRD_INDEX);
         nodes.generate_children_list();
-        nodes.update_open_list();
-        let mut children = nodes.get_open_list();
+        let mut children = nodes.get_children_list();
         children.sort_by(|a, b| a.cmp(b));
 
         assert_eq!(
@@ -111,8 +108,7 @@ mod tests {
         const FOURTH_INDEX: usize = 95;
         nodes.set_current(FOURTH_INDEX);
         nodes.generate_children_list();
-        nodes.update_open_list();
-        let mut children = nodes.get_open_list();
+        let mut children = nodes.get_children_list();
         children.sort_by(|a, b| a.cmp(b));
 
         assert_eq!(
@@ -124,8 +120,7 @@ mod tests {
         const FIFTH_INDEX: usize = 99;
         nodes.set_current(FIFTH_INDEX);
         nodes.generate_children_list();
-        nodes.update_open_list();
-        let mut children = nodes.get_open_list();
+        let mut children = nodes.get_children_list();
         children.sort_by(|a, b| a.cmp(b));
 
         assert_eq!(
@@ -259,6 +254,58 @@ mod tests {
             nodes.get_current(),
             2,
             "unexpected current",
+        );
+    }
+
+    #[test]
+    fn test_open_list_update() {
+
+        const WIDTH: u8 = 10;
+        const HEIGHT: u8 = 10;
+        const FIRST_DEPARTURE_INDEX: usize = 0;
+        const FIRST_ARRIVAL_INDEX: usize = 25;
+        let mut nodes = Nodes::new(
+            WIDTH,
+            HEIGHT,
+            FIRST_DEPARTURE_INDEX,
+            FIRST_ARRIVAL_INDEX,
+        );
+
+        nodes.generate_heuristics();
+        nodes.generate_children_list();
+        nodes.update_open_list();
+
+        assert_eq!(
+            nodes.get_closed_list(),
+            [0],
+            "unexpected closed list",
+        );
+
+        assert_eq!(
+            nodes.get_open_list(),
+            [1, 10, 11],
+            "unexpected open list",
+        );
+
+        nodes.generate_costs();
+        nodes.iterate();
+
+        nodes.generate_children_list();
+        nodes.update_open_list();
+
+        assert_eq!(
+            nodes.get_closed_list(),
+            [0, 1],
+            "unexpected closed list",
+        );
+
+        let mut open_list = nodes.get_open_list();
+        open_list.sort_by(|a, b| a.cmp(b));
+
+        assert_eq!(
+            open_list,
+            [2, 10, 11, 12],
+            "unexpected open list",
         );
     }
 }
