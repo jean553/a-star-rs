@@ -442,12 +442,29 @@ mod lib {
         }
 
         /// Sets the open list as the children list
-        ///
-        /// TODO: partially implemented, the open list is not a copy
-        /// of the children list, the current code only works
-        /// for the first iteration
         pub fn update_open_list(&mut self) {
-            self.open_list = self.children_list.clone();
+
+            let open_list = &mut self.open_list;
+
+            for child in self.children_list.iter() {
+
+                if
+                    open_list.contains(child) ||
+                    self.closed_list.contains(child) {
+                    continue;
+                }
+
+                open_list.push(*child);
+            }
+        }
+
+        /// Returns the children list
+        ///
+        /// # Returns:
+        ///
+        /// list of the current children
+        pub fn get_children_list(&self) -> Vec<usize> {
+            self.children_list.clone()
         }
     }
 }
