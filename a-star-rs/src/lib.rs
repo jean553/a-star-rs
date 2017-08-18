@@ -1,88 +1,15 @@
 #![feature(vec_remove_item)]
 
 mod utils;
+mod node;
 
-/// we allow dead code to prevent warnings saying the functions are not used
+/// as this is a library, there is no explicit call
+/// of the methods from the library itself
 #[allow(dead_code)]
 mod lib {
 
     use utils;
-
-    pub struct Node {
-        heuristic: u8,
-        cost: u8,
-        usuable: bool,
-    }
-
-    impl Node {
-
-        /// Constructor for a new Node object.
-        ///
-        /// # Returns:
-        ///
-        /// Created Node object.
-        pub fn new() -> Node {
-            Node {
-                heuristic: 0,
-                cost: 0,
-                usuable: true,
-            }
-        }
-
-        /// Sets if the node is usuable or not.
-        ///
-        /// # Arguments:
-        ///
-        /// * `usuable` - true if the node is usuable
-        pub fn set_is_usuable(
-            &mut self,
-            usuable: bool,
-        ) {
-            self.usuable = usuable;
-        }
-
-        /// Sets the node heuristic.
-        ///
-        /// # Arguments:
-        ///
-        /// * `heuristic` - the heuristic to set
-        pub fn set_heuristic(
-            &mut self,
-            heuristic: u8,
-        ) {
-            self.heuristic = heuristic;
-        }
-
-        /// Returns the node heuristic.
-        ///
-        /// # Returns:
-        ///
-        /// the node heuristic
-        pub fn get_heuristic(&self) -> u8 {
-            self.heuristic
-        }
-
-        /// Sets the cost.
-        ///
-        /// # Arguments:
-        ///
-        /// * `cost` - the cost to set
-        pub fn set_cost(
-            &mut self,
-            cost: u8,
-        ) {
-            self.cost = cost;
-        }
-
-        /// Getter of the cost.
-        ///
-        /// # Returns:
-        ///
-        /// the node movement cost
-        pub fn get_cost(&self) -> u8 {
-            self.cost
-        }
-    }
+    use node::Node;
 
     pub struct Nodes {
         width: u8,
@@ -368,7 +295,7 @@ mod lib {
                 }
 
                 let node = &self.nodes[*index];
-                let value = node.heuristic + node.cost;
+                let value = node.get_heuristic() + node.get_cost();
 
                 if value < minimum {
                     minimum = value;
