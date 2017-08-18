@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests {
 
-    use lib::Nodes;
+    use nodes::Nodes;
 
     #[test]
     fn test_create_nodes() {
