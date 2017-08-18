@@ -1,56 +1,17 @@
 #![feature(vec_remove_item)]
 
+mod utils;
+
 /// we allow dead code to prevent warnings saying the functions are not used
 #[allow(dead_code)]
 mod lib {
 
+    use utils;
 
     pub struct Node {
         heuristic: u8,
         cost: u8,
         usuable: bool,
-    }
-
-    /// Returns the horizontal and vertical position for the given index.
-    ///
-    /// # Arguments:
-    ///
-    /// * `index` - the source index
-    /// * `width` - number of nodes per line
-    ///
-    /// # Returns:
-    ///
-    /// tuple that contains the horizontal and vertical positions
-    fn get_positions(
-        index: usize,
-        width: u8,
-    ) -> (u8, u8) {
-
-        let index = index as u8;
-
-        return (
-            index % width,
-            index / width,
-        );
-    }
-
-    /// Returns the index according to the horizontal and vertical positions.
-    ///
-    /// # Arguments:
-    ///
-    /// * `horizontal_position` - the horizontal position
-    /// * `vertical_position` - the vertical position
-    /// * `width` - nodes per line
-    ///
-    /// # Returns:
-    ///
-    /// the index
-    fn get_index_from_positions(
-        horizontal_position: u8,
-        vertical_position: u8,
-        width: u8,
-    ) -> usize {
-        ((vertical_position * width) + horizontal_position) as usize
     }
 
     impl Node {
@@ -193,7 +154,7 @@ mod lib {
             let (
                 index_x,
                 index_y,
-            ) = get_positions(
+            ) = utils::get_positions(
                 self.arrival,
                 self.width,
             );
@@ -203,7 +164,7 @@ mod lib {
                 let (
                     node_x,
                     node_y,
-                ) = get_positions(
+                ) = utils::get_positions(
                     counter,
                     self.width,
                 );
@@ -259,14 +220,14 @@ mod lib {
             let (
                 horizontal_position,
                 vertical_position,
-            ) = get_positions(
+            ) = utils::get_positions(
                 self.current,
                 self.width,
             );
 
             if horizontal_position != 0 {
                 children.push(
-                    get_index_from_positions(
+                    utils::get_index_from_positions(
                         horizontal_position - 1,
                         vertical_position,
                         self.width,
@@ -276,7 +237,7 @@ mod lib {
 
             if horizontal_position != self.width - 1 {
                 children.push(
-                    get_index_from_positions(
+                    utils::get_index_from_positions(
                         horizontal_position + 1,
                         vertical_position,
                         self.width,
@@ -286,7 +247,7 @@ mod lib {
 
             if vertical_position != 0 {
                 children.push(
-                    get_index_from_positions(
+                    utils::get_index_from_positions(
                         horizontal_position,
                         vertical_position - 1,
                         self.width,
@@ -295,7 +256,7 @@ mod lib {
 
                 if horizontal_position != self.width - 1 {
                     children.push(
-                        get_index_from_positions(
+                        utils::get_index_from_positions(
                             horizontal_position + 1,
                             vertical_position - 1,
                             self.width,
@@ -305,7 +266,7 @@ mod lib {
 
                 if horizontal_position != 0 {
                     children.push(
-                        get_index_from_positions(
+                        utils::get_index_from_positions(
                             horizontal_position - 1,
                             vertical_position - 1,
                             self.width,
@@ -316,7 +277,7 @@ mod lib {
 
             if vertical_position != self.height - 1 {
                 children.push(
-                    get_index_from_positions(
+                    utils::get_index_from_positions(
                         horizontal_position,
                         vertical_position + 1,
                         self.width,
@@ -325,7 +286,7 @@ mod lib {
 
                 if horizontal_position != self.width - 1 {
                     children.push(
-                        get_index_from_positions(
+                        utils::get_index_from_positions(
                             horizontal_position + 1,
                             vertical_position + 1,
                             self.width,
@@ -335,7 +296,7 @@ mod lib {
 
                 if horizontal_position != 0 {
                     children.push(
-                        get_index_from_positions(
+                        utils::get_index_from_positions(
                             horizontal_position - 1,
                             vertical_position + 1,
                             self.width,
