@@ -26,6 +26,8 @@ impl Nodes {
     ///
     /// * `width` - the number of nodes per line,
     /// * `height` - the number of lines
+    /// * `departure` - the departure cell index
+    /// * `arrival` - the arrival cell index
     ///
     /// # Returns:
     ///
