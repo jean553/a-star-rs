@@ -237,7 +237,7 @@ impl Nodes {
     ///
     /// # Returns:
     ///
-    /// vector that contains the indeces of all the children
+    /// vector that contains the indices of all the children
     pub fn get_open_list(&self) -> Vec<usize> {
         self.open_list.clone()
     }
@@ -334,9 +334,7 @@ impl Nodes {
 
         for child in self.children_list.iter() {
 
-            if
-                open_list.contains(child) ||
-                self.closed_list.contains(child) {
+            if open_list.contains(child) || self.closed_list.contains(child) {
                 continue;
             }
 
