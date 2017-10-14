@@ -356,4 +356,22 @@ impl Nodes {
             index / self.width,
         )
     }
+
+    /// Returns the index according to the horizontal and vertical positions.
+    ///
+    /// # Arguments:
+    ///
+    /// * `horizontal_position` - the horizontal position
+    /// * `vertical_position` - the vertical position
+    ///
+    /// # Returns:
+    ///
+    /// the index
+    fn get_index_from_positions(
+        &self,
+        horizontal_position: u8,
+        vertical_position: u8,
+    ) -> usize {
+        (vertical_position * self.width + horizontal_position) as usize
+    }
 }
