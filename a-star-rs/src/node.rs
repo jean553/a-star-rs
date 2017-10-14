@@ -1,7 +1,6 @@
 //! One node structure and its implementation.
 
-/// as this is a library, there is no explicit call
-/// of the methods from the library itself
+/// One node on the grid.
 #[allow(dead_code)]
 #[derive(Clone)]
 pub struct Node {

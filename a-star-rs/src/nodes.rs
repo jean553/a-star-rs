@@ -1,9 +1,8 @@
-//! Module that contains the map structure and its implementation. 
+//! Module that contains the grid structure and its implementation.
 
 use node::Node;
 
-/// as this is a library, there is no explicit call
-/// of the methods from the library itself
+/// Grid that contains all the nodes.
 #[allow(dead_code)]
 #[derive(Clone)]
 pub struct Nodes {
