@@ -6,6 +6,7 @@ use node::Node;
 /// as this is a library, there is no explicit call
 /// of the methods from the library itself
 #[allow(dead_code)]
+#[derive(Clone)]
 pub struct Nodes {
     width: u8,
     height: u8,
@@ -79,20 +80,15 @@ impl Nodes {
         let (
             index_x,
             index_y,
-        ) = utils::get_positions(
-            self.arrival,
-            self.width,
-        );
+        ) = self.get_positions(self.arrival);
 
+        let nodes_copy = self.clone();
         for (counter, node) in self.nodes.iter_mut().enumerate() {
 
             let (
                 node_x,
                 node_y,
-            ) = utils::get_positions(
-                counter,
-                self.width,
-            );
+            ) = nodes_copy.get_positions(counter);
 
             /* rounded at the integer level */
             let heuristic = (
@@ -145,10 +141,7 @@ impl Nodes {
         let (
             horizontal_position,
             vertical_position,
-        ) = utils::get_positions(
-            self.current,
-            self.width,
-        );
+        ) = self.get_positions(self.current);
 
         if horizontal_position != 0 {
             children.push(
@@ -349,5 +342,27 @@ impl Nodes {
     /// list of the current children
     pub fn get_children_list(&self) -> Vec<usize> {
         self.children_list.clone()
+    }
+
+    /// Returns the horizontal and vertical position for the given index.
+    ///
+    /// # Arguments:
+    ///
+    /// * `index` - the source index
+    ///
+    /// # Returns:
+    ///
+    /// tuple that contains the horizontal and vertical positions
+    fn get_positions(
+        &self,
+        index: usize,
+    ) -> (u8, u8) {
+
+        let index = index as u8;
+
+        (
+            index % self.width,
+            index / self.width,
+        )
     }
 }

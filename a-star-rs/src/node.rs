@@ -4,6 +4,7 @@
 /// as this is a library, there is no explicit call
 /// of the methods from the library itself
 #[allow(dead_code)]
+#[derive(Clone)]
 pub struct Node {
     heuristic: u8,
     cost: u8,
