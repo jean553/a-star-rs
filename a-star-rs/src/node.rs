@@ -30,7 +30,7 @@ impl Node {
     /// # Arguments:
     ///
     /// * `usuable` - true if the node is usuable
-    pub fn set_is_usuable(
+    pub fn set_usuable(
         &mut self,
         usuable: bool,
     ) {

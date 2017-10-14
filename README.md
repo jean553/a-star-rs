@@ -54,3 +54,11 @@ added to the closed list. The following code returns the closed list content.
 ```rust
 nodes.get_closed_list(); // [5]
 ```
+
+Some indices can be set as `not usuable`. By default, they are all usuables.
+An unusuable node is not considered at all and
+cannot be part of the final path.
+
+```rust
+nodes.get_node_by_index(23).set_usuable(false);
+```
