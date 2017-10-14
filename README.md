@@ -60,5 +60,5 @@ An unusuable node is not considered at all and
 cannot be part of the final path.
 
 ```rust
-nodes.get_node_by_index(23).set_usuable(false);
+nodes.get_node_by_index(23).set_unusuable();
 ```
