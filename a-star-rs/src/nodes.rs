@@ -141,10 +141,7 @@ impl Nodes {
         let (
             horizontal_position,
             vertical_position,
-        ) = utils::get_positions(
-            self.current,
-            self.width,
-        );
+        ) = self.get_positions(self.current);
 
         if horizontal_position != 0 {
             children.push(
@@ -345,5 +342,27 @@ impl Nodes {
     /// list of the current children
     pub fn get_children_list(&self) -> Vec<usize> {
         self.children_list.clone()
+    }
+
+    /// Returns the horizontal and vertical position for the given index.
+    ///
+    /// # Arguments:
+    ///
+    /// * `index` - the source index
+    ///
+    /// # Returns:
+    ///
+    /// tuple that contains the horizontal and vertical positions
+    fn get_positions(
+        &self,
+        index: usize,
+    ) -> (u8, u8) {
+
+        let index = index as u8;
+
+        (
+            index % self.width,
+            index / self.width,
+        )
     }
 }
