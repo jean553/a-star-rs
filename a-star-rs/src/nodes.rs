@@ -331,6 +331,22 @@ impl Nodes {
         self.children_list.clone()
     }
 
+    /// Returns a node reference of a node for read and write access.
+    ///
+    /// # Arguments:
+    ///
+    /// `index` - the index of the node to get
+    ///
+    /// # Returns:
+    ///
+    /// The node to read or write.
+    pub fn get_node_by_index(
+        &mut self,
+        index: usize,
+    ) -> &mut Node {
+        &mut self.nodes[index]
+    }
+
     /// Returns the horizontal and vertical position for the given index.
     ///
     /// # Arguments:
