@@ -144,49 +144,44 @@ impl Nodes {
 
         if horizontal_position != 0 {
             children.push(
-                utils::get_index_from_positions(
+                self.get_index_from_positions(
                     horizontal_position - 1,
                     vertical_position,
-                    self.width,
                 )
             );
         }
 
         if horizontal_position != self.width - 1 {
             children.push(
-                utils::get_index_from_positions(
+                self.get_index_from_positions(
                     horizontal_position + 1,
                     vertical_position,
-                    self.width,
                 )
             );
         }
 
         if vertical_position != 0 {
             children.push(
-                utils::get_index_from_positions(
+                self.get_index_from_positions(
                     horizontal_position,
                     vertical_position - 1,
-                    self.width,
                 )
             );
 
             if horizontal_position != self.width - 1 {
                 children.push(
-                    utils::get_index_from_positions(
+                    self.get_index_from_positions(
                         horizontal_position + 1,
                         vertical_position - 1,
-                        self.width,
                     )
                 );
             }
 
             if horizontal_position != 0 {
                 children.push(
-                    utils::get_index_from_positions(
+                    self.get_index_from_positions(
                         horizontal_position - 1,
                         vertical_position - 1,
-                        self.width,
                     )
                 );
             }
@@ -194,29 +189,26 @@ impl Nodes {
 
         if vertical_position != self.height - 1 {
             children.push(
-                utils::get_index_from_positions(
+                self.get_index_from_positions(
                     horizontal_position,
                     vertical_position + 1,
-                    self.width,
                 )
             );
 
             if horizontal_position != self.width - 1 {
                 children.push(
-                    utils::get_index_from_positions(
+                    self.get_index_from_positions(
                         horizontal_position + 1,
                         vertical_position + 1,
-                        self.width,
                     )
                 );
             }
 
             if horizontal_position != 0 {
                 children.push(
-                    utils::get_index_from_positions(
+                    self.get_index_from_positions(
                         horizontal_position - 1,
                         vertical_position + 1,
-                        self.width,
                     )
                 );
             }
