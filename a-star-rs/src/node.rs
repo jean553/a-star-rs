@@ -1,5 +1,4 @@
-//! Module that contains the node structure and its implementation.
-//! A node is a step on the map.
+//! One node structure and its implementation.
 
 /// as this is a library, there is no explicit call
 /// of the methods from the library itself

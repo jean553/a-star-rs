@@ -1,6 +1,9 @@
-#![feature(vec_remove_item)] /// TODO: #37 Vec::remove_item is experimental
+#![feature(vec_remove_item)]
 
+/// One node structure and its implementation.
 mod node;
+
+/// Contains all nodes.
 mod nodes;
 
 #[cfg(test)]
