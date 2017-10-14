@@ -31,7 +31,8 @@ mod tests {
 
         const FIRST_INDEX_EXPECTED_HEURISTIC: u8 = 1;
         assert_eq!(
-            nodes.get_node_heuristic(FIRST_INDEX),
+            nodes.get_node_by_index(FIRST_INDEX)
+                .get_heuristic(),
             FIRST_INDEX_EXPECTED_HEURISTIC,
             "Unexpected heuristic.",
         );
@@ -39,7 +40,8 @@ mod tests {
         const SECOND_INDEX: usize = 2;
         const SECOND_INDEX_EXPECTED_HEURISTIC: u8 = 2;
         assert_eq!(
-            nodes.get_node_heuristic(SECOND_INDEX),
+            nodes.get_node_by_index(SECOND_INDEX)
+                .get_heuristic(),
             SECOND_INDEX_EXPECTED_HEURISTIC,
             "Unexpected heuristic.",
         );
@@ -47,7 +49,8 @@ mod tests {
         const LAST_INDEX: usize = 99;
         const LAST_INDEX_EXPECTED_HEURISTIC: u8 = 12;
         assert_eq!(
-            nodes.get_node_heuristic(LAST_INDEX),
+            nodes.get_node_by_index(LAST_INDEX)
+                .get_heuristic(),
             LAST_INDEX_EXPECTED_HEURISTIC,
             "Unexpected heuristic.",
         );

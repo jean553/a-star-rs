@@ -83,22 +83,6 @@ impl Nodes {
         }
     }
 
-    /// Returns the heuristic of the given node.
-    ///
-    /// # Arguments:
-    ///
-    /// * `index` - index of the concerned node
-    ///
-    /// # Returns:
-    ///
-    /// Heuristic of the node.
-    pub fn get_node_heuristic(
-        &self,
-        index: usize,
-    ) -> u8 {
-        self.nodes[index].get_heuristic()
-    }
-
     /// Returns the cost of a node.
     ///
     /// # Arguments:
