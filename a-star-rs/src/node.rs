@@ -53,7 +53,7 @@ impl Node {
     ///
     /// # Returns:
     ///
-    /// the node heuristic
+    /// The node heuristic.
     pub fn get_heuristic(&self) -> u8 {
         self.heuristic
     }
@@ -74,7 +74,7 @@ impl Node {
     ///
     /// # Returns:
     ///
-    /// the node movement cost
+    /// The node movement cost.
     pub fn get_cost(&self) -> u8 {
         self.cost
     }

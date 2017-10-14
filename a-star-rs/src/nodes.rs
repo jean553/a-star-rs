@@ -106,7 +106,7 @@ impl Nodes {
     ///
     /// # Returns:
     ///
-    /// heuristic of the node
+    /// Heuristic of the node.
     pub fn get_node_heuristic(
         &self,
         index: usize,
@@ -122,7 +122,7 @@ impl Nodes {
     ///
     /// # Returns:
     ///
-    /// cost of the node
+    /// Cost of the node.
     pub fn get_node_cost(
         &self,
         index: usize,
@@ -220,12 +220,12 @@ impl Nodes {
     ///
     /// # Returns:
     ///
-    /// vector that contains the indices of all the children
+    /// Vector that contains the indices of all the children.
     pub fn get_open_list(&self) -> Vec<usize> {
         self.open_list.clone()
     }
 
-    /// Generates the costs of the children of the open list
+    /// Generates the costs of the children of the open list.
     pub fn generate_costs(&mut self) {
 
         let signed_departure = self.current as i8;
@@ -253,17 +253,17 @@ impl Nodes {
         }
     }
 
-    /// Getter for the closed list
+    /// Getter for the closed list.
     ///
     /// # Returns:
     ///
-    /// vector containing the closed list
+    /// Vector containing the closed list.
     pub fn get_closed_list(&self) -> Vec<usize> {
         self.closed_list.clone()
     }
 
     /// Iterate the research to the next node,
-    /// remove the target from the open list
+    /// remove the target from the open list.
     pub fn iterate(&mut self) {
 
         let mut minimum: u8 = <u8>::max_value();
@@ -289,16 +289,16 @@ impl Nodes {
         self.closed_list.push(target);
     }
 
-    /// Getter for the current index
+    /// Getter for the current index.
     ///
     /// # Returns:
     ///
-    /// the current index
+    /// The current index.
     pub fn get_current(&self) -> usize {
         self.current
     }
 
-    /// Setter of the current index
+    /// Setter of the current index.
     ///
     /// # Arguments:
     ///
@@ -310,7 +310,7 @@ impl Nodes {
         self.current = current;
     }
 
-    /// Sets the open list as the children list
+    /// Sets the open list as the children list.
     pub fn update_open_list(&mut self) {
 
         let open_list = &mut self.open_list;
@@ -325,11 +325,11 @@ impl Nodes {
         }
     }
 
-    /// Returns the children list
+    /// Returns the children list.
     ///
     /// # Returns:
     ///
-    /// list of the current children
+    /// List of the current children.
     pub fn get_children_list(&self) -> Vec<usize> {
         self.children_list.clone()
     }
@@ -342,7 +342,7 @@ impl Nodes {
     ///
     /// # Returns:
     ///
-    /// tuple that contains the horizontal and vertical positions
+    /// Tuple that contains the horizontal and vertical positions.
     fn get_positions(
         &self,
         index: usize,
@@ -365,7 +365,7 @@ impl Nodes {
     ///
     /// # Returns:
     ///
-    /// the index
+    /// The index from the given positions.
     fn get_index_from_positions(
         &self,
         horizontal_position: u8,
