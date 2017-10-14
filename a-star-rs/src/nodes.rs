@@ -1,6 +1,5 @@
 //! Module that contains the map structure and its implementation. 
 
-use utils;
 use node::Node;
 
 /// as this is a library, there is no explicit call
