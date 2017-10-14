@@ -60,5 +60,13 @@ An unusuable node is not considered at all and
 cannot be part of the final path.
 
 ```rust
-nodes.get_node_by_index(23).set_usuable(false);
+nodes.get_node_by_index(23).set_unusuable();
+```
+
+The following code can be used to generate the heuristics. A node heuristic
+is the distance (in nodes) from the current node to the arrival node.
+The nodes around the destination node have an heuristic of 1.
+
+```rust
+nodes.generate_heuristics();
 ```
