@@ -23,3 +23,9 @@ Run tests.
 ```bash
 cargo test
 ```
+
+Generate documentation.
+
+```bash
+cargo rustdoc -- --no-defaults
+```

@@ -1,9 +1,9 @@
-//! TODO: #37 the `nodes` module uses Vec::remove_item which is part
-//! of the nightly experimental API; this flag should be removed
-//! as soon as the feature becomes stable
 #![feature(vec_remove_item)]
 
+/// One node structure and its implementation.
 mod node;
+
+/// Contains all nodes.
 mod nodes;
 
 #[cfg(test)]

@@ -1,8 +1,6 @@
-//! Module that contains the node structure and its implementation.
-//! A node is a step on the map.
+//! One node structure and its implementation.
 
-/// as this is a library, there is no explicit call
-/// of the methods from the library itself
+/// One node on the grid.
 #[allow(dead_code)]
 #[derive(Clone)]
 pub struct Node {
@@ -55,7 +53,7 @@ impl Node {
     ///
     /// # Returns:
     ///
-    /// the node heuristic
+    /// The node heuristic.
     pub fn get_heuristic(&self) -> u8 {
         self.heuristic
     }
@@ -76,7 +74,7 @@ impl Node {
     ///
     /// # Returns:
     ///
-    /// the node movement cost
+    /// The node movement cost.
     pub fn get_cost(&self) -> u8 {
         self.cost
     }
