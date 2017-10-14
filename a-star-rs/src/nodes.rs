@@ -71,8 +71,7 @@ impl Nodes {
         self.nodes[index].set_is_usuable(usuable);
     }
 
-    /// Generate the heuristics of every node
-    /// according to the departure and arrival indices.
+    /// Generate the heuristics of every node from departure and arrival.
     pub fn generate_heuristics(&mut self) {
 
         let (
@@ -130,8 +129,7 @@ impl Nodes {
         self.nodes[index].get_cost()
     }
 
-    /// Generates the open list of children for the given node
-    /// for the current index.
+    /// Generates the open list of children for the current index.
     pub fn generate_children_list(&mut self) {
 
         let mut children: Vec<usize> = Vec::new();
@@ -262,8 +260,7 @@ impl Nodes {
         self.closed_list.clone()
     }
 
-    /// Iterate the research to the next node,
-    /// remove the target from the open list.
+    /// Iterates to the next node and remove the target from the open list.
     pub fn iterate(&mut self) {
 
         let mut minimum: u8 = <u8>::max_value();
