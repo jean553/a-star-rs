@@ -83,22 +83,6 @@ impl Nodes {
         }
     }
 
-    /// Returns the cost of a node.
-    ///
-    /// # Arguments:
-    ///
-    /// * `index` - index of the concerned node
-    ///
-    /// # Returns:
-    ///
-    /// Cost of the node.
-    pub fn get_node_cost(
-        &self,
-        index: usize,
-    ) -> u8 {
-        self.nodes[index].get_cost()
-    }
-
     /// Generates the open list of children for the current index.
     pub fn generate_children_list(&mut self) {
 

@@ -150,25 +150,29 @@ mod tests {
         nodes.generate_costs();
 
         assert_eq!(
-            nodes.get_node_cost(0),
+            nodes.get_node_by_index(0)
+                .get_cost(),
             0,
             "unexpected cost",
         );
 
         assert_eq!(
-            nodes.get_node_cost(1),
+            nodes.get_node_by_index(1)
+                .get_cost(),
             10,
             "unexpected cost",
         );
 
         assert_eq!(
-            nodes.get_node_cost(10),
+            nodes.get_node_by_index(10)
+                .get_cost(),
             10,
             "unexpected cost",
         );
 
         assert_eq!(
-            nodes.get_node_cost(11),
+            nodes.get_node_by_index(11)
+                .get_cost(),
             14,
             "unexpected cost",
         );
