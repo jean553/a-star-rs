@@ -24,16 +24,15 @@ mod tests {
         );
 
         const FIRST_INDEX: usize = 0;
-        nodes.set_node_usuable(
-            FIRST_INDEX,
-            false,
-        );
+        nodes.get_node_by_index(FIRST_INDEX)
+            .set_is_usuable(false);
 
         nodes.generate_heuristics();
 
         const FIRST_INDEX_EXPECTED_HEURISTIC: u8 = 1;
         assert_eq!(
-            nodes.get_node_heuristic(FIRST_INDEX),
+            nodes.get_node_by_index(FIRST_INDEX)
+                .get_heuristic(),
             FIRST_INDEX_EXPECTED_HEURISTIC,
             "Unexpected heuristic.",
         );
@@ -41,7 +40,8 @@ mod tests {
         const SECOND_INDEX: usize = 2;
         const SECOND_INDEX_EXPECTED_HEURISTIC: u8 = 2;
         assert_eq!(
-            nodes.get_node_heuristic(SECOND_INDEX),
+            nodes.get_node_by_index(SECOND_INDEX)
+                .get_heuristic(),
             SECOND_INDEX_EXPECTED_HEURISTIC,
             "Unexpected heuristic.",
         );
@@ -49,7 +49,8 @@ mod tests {
         const LAST_INDEX: usize = 99;
         const LAST_INDEX_EXPECTED_HEURISTIC: u8 = 12;
         assert_eq!(
-            nodes.get_node_heuristic(LAST_INDEX),
+            nodes.get_node_by_index(LAST_INDEX)
+                .get_heuristic(),
             LAST_INDEX_EXPECTED_HEURISTIC,
             "Unexpected heuristic.",
         );
@@ -149,25 +150,29 @@ mod tests {
         nodes.generate_costs();
 
         assert_eq!(
-            nodes.get_node_cost(0),
+            nodes.get_node_by_index(0)
+                .get_cost(),
             0,
             "unexpected cost",
         );
 
         assert_eq!(
-            nodes.get_node_cost(1),
+            nodes.get_node_by_index(1)
+                .get_cost(),
             10,
             "unexpected cost",
         );
 
         assert_eq!(
-            nodes.get_node_cost(10),
+            nodes.get_node_by_index(10)
+                .get_cost(),
             10,
             "unexpected cost",
         );
 
         assert_eq!(
-            nodes.get_node_cost(11),
+            nodes.get_node_by_index(11)
+                .get_cost(),
             14,
             "unexpected cost",
         );

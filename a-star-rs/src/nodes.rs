@@ -57,20 +57,6 @@ impl Nodes {
         }
     }
 
-    /// Specifies usuable nodes.
-    ///
-    /// # Arguments:
-    ///
-    /// * `index` - the index of the node to set
-    /// * `usuable` - is the node usuable or not
-    pub fn set_node_usuable(
-        &mut self,
-        index: usize,
-        usuable: bool,
-    ) {
-        self.nodes[index].set_is_usuable(usuable);
-    }
-
     /// Generate the heuristics of every node from departure and arrival.
     pub fn generate_heuristics(&mut self) {
 
@@ -95,38 +81,6 @@ impl Nodes {
 
             (*node).set_heuristic(heuristic);
         }
-    }
-
-    /// Returns the heuristic of the given node.
-    ///
-    /// # Arguments:
-    ///
-    /// * `index` - index of the concerned node
-    ///
-    /// # Returns:
-    ///
-    /// Heuristic of the node.
-    pub fn get_node_heuristic(
-        &self,
-        index: usize,
-    ) -> u8 {
-        self.nodes[index].get_heuristic()
-    }
-
-    /// Returns the cost of a node.
-    ///
-    /// # Arguments:
-    ///
-    /// * `index` - index of the concerned node
-    ///
-    /// # Returns:
-    ///
-    /// Cost of the node.
-    pub fn get_node_cost(
-        &self,
-        index: usize,
-    ) -> u8 {
-        self.nodes[index].get_cost()
     }
 
     /// Generates the open list of children for the current index.
@@ -329,6 +283,22 @@ impl Nodes {
     /// List of the current children.
     pub fn get_children_list(&self) -> Vec<usize> {
         self.children_list.clone()
+    }
+
+    /// Returns a node reference of a node for read and write access.
+    ///
+    /// # Arguments:
+    ///
+    /// `index` - the index of the node to get
+    ///
+    /// # Returns:
+    ///
+    /// The node to read or write.
+    pub fn get_node_by_index(
+        &mut self,
+        index: usize,
+    ) -> &mut Node {
+        &mut self.nodes[index]
     }
 
     /// Returns the horizontal and vertical position for the given index.
