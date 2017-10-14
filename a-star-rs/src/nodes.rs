@@ -80,20 +80,15 @@ impl Nodes {
         let (
             index_x,
             index_y,
-        ) = utils::get_positions(
-            self.arrival,
-            self.width,
-        );
+        ) = self.get_positions(self.arrival);
 
+        let nodes_copy = self.clone();
         for (counter, node) in self.nodes.iter_mut().enumerate() {
 
             let (
                 node_x,
                 node_y,
-            ) = utils::get_positions(
-                counter,
-                self.width,
-            );
+            ) = nodes_copy.get_positions(counter);
 
             /* rounded at the integer level */
             let heuristic = (
