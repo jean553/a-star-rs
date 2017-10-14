@@ -25,7 +25,7 @@ mod tests {
 
         const FIRST_INDEX: usize = 0;
         nodes.get_node_by_index(FIRST_INDEX)
-            .set_usuable(false);
+            .set_unusuable();
 
         nodes.generate_heuristics();
 

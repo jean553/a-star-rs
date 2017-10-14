@@ -25,16 +25,9 @@ impl Node {
         }
     }
 
-    /// Sets if the node is usuable or not.
-    ///
-    /// # Arguments:
-    ///
-    /// * `usuable` - true if the node is usuable
-    pub fn set_usuable(
-        &mut self,
-        usuable: bool,
-    ) {
-        self.usuable = usuable;
+    /// Sets the node as not usuable.
+    pub fn set_unusuable(&mut self) {
+        self.usuable = false;
     }
 
     /// Sets the node heuristic.
