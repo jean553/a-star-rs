@@ -57,20 +57,6 @@ impl Nodes {
         }
     }
 
-    /// Specifies usuable nodes.
-    ///
-    /// # Arguments:
-    ///
-    /// * `index` - the index of the node to set
-    /// * `usuable` - is the node usuable or not
-    pub fn set_node_usuable(
-        &mut self,
-        index: usize,
-        usuable: bool,
-    ) {
-        self.nodes[index].set_is_usuable(usuable);
-    }
-
     /// Generate the heuristics of every node from departure and arrival.
     pub fn generate_heuristics(&mut self) {
 

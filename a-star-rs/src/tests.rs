@@ -24,10 +24,8 @@ mod tests {
         );
 
         const FIRST_INDEX: usize = 0;
-        nodes.set_node_usuable(
-            FIRST_INDEX,
-            false,
-        );
+        nodes.get_node_by_index(FIRST_INDEX)
+            .set_is_usuable(false);
 
         nodes.generate_heuristics();
 
