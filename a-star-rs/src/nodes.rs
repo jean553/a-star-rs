@@ -239,6 +239,10 @@ impl Nodes {
         // FIXME: #55 incorrect behaviour if no path is found
         self.current = target;
 
+        // FIXME: #60 check if going to an open list node from the new current
+        // node is faster than going from the previous current node
+        // to this open list node
+
         self.open_list.remove_item(&target);
         self.closed_list.push(target);
     }
