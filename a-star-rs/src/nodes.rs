@@ -9,8 +9,8 @@ pub struct Nodes {
     width: u8,
     height: u8,
     nodes: Vec<Node>,
-    current: usize,
-    arrival: usize,
+    current_index: usize,
+    arrival_index: usize,
     open_list: Vec<usize>,
     closed_list: Vec<usize>,
     children_list: Vec<usize>,
@@ -49,8 +49,8 @@ impl Nodes {
             width: width,
             height: height,
             nodes: nodes,
-            current: departure,
-            arrival: arrival,
+            current_index: departure,
+            arrival_index: arrival,
             open_list: Vec::new(),
             closed_list: vec![departure],
             children_list: Vec::new(),
@@ -63,7 +63,7 @@ impl Nodes {
         let (
             index_x,
             index_y,
-        ) = self.get_positions(self.arrival);
+        ) = self.get_positions(self.arrival_index);
 
         let nodes_copy = self.clone();
 
@@ -92,7 +92,7 @@ impl Nodes {
         let (
             horizontal_position,
             vertical_position,
-        ) = self.get_positions(self.current);
+        ) = self.get_positions(self.current_index);
 
         if horizontal_position != 0 {
             children.push(
@@ -181,7 +181,7 @@ impl Nodes {
     /// Generates the costs of the open list nodes.
     pub fn generate_costs(&mut self) {
 
-        let signed_current = self.current as i8;
+        let signed_current = self.current_index as i8;
 
         for index in self.open_list.iter() {
 
@@ -237,7 +237,7 @@ impl Nodes {
         }
 
         // FIXME: #55 incorrect behaviour if no path is found
-        self.current = target;
+        self.current_index = target;
 
         // FIXME: #60 check if going to an open list node from the new current
         // node is faster than going from the previous current node
@@ -252,8 +252,8 @@ impl Nodes {
     /// # Returns:
     ///
     /// The current index.
-    pub fn get_current(&self) -> usize {
-        self.current
+    pub fn get_current_index(&self) -> usize {
+        self.current_index
     }
 
     /// Setter of the current index.
@@ -261,11 +261,11 @@ impl Nodes {
     /// # Arguments:
     ///
     /// `index` - the current index
-    pub fn set_current(
+    pub fn set_current_index(
         &mut self,
         current: usize,
     ) {
-        self.current = current;
+        self.current_index = current;
     }
 
     /// Sets the open list as the children list.
