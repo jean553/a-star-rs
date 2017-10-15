@@ -236,7 +236,9 @@ impl Nodes {
             }
         }
 
+        // FIXME: #55 incorrect behaviour if no path is found
         self.current = target;
+
         self.open_list.remove_item(&target);
         self.closed_list.push(target);
     }
