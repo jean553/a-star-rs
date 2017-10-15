@@ -362,5 +362,16 @@ mod tests {
             [0, 2, 5, 6, 7],
             "unexpected children",
         );
+
+        nodes.update_open_list();
+
+        let mut open_list = nodes.get_open_list();
+        open_list.sort_by(|a, b| a.cmp(b));
+
+        assert_eq!(
+            open_list,
+            [2, 5, 6, 7],
+            "unexpected open list",
+        );
     }
 }
