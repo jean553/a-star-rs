@@ -182,6 +182,7 @@ impl Nodes {
     pub fn generate_costs(&mut self) {
 
         let signed_current = self.current_index as i8;
+        let current_cost = self.nodes[self.current_index].get_cost();
 
         for index in self.open_list.iter() {
 
@@ -191,19 +192,19 @@ impl Nodes {
             const HORIZONTAL_MOVE: i8 = 1;
             const VERTICAL_MOVE: i8 = 10;
 
+            const DIAGONAL_MOVE: u8 = 14;
+            let mut cost = DIAGONAL_MOVE;
+
             if signed_index == signed_current - HORIZONTAL_MOVE ||
                 signed_index == signed_current + HORIZONTAL_MOVE ||
                 signed_index == signed_current - VERTICAL_MOVE ||
                 signed_index == signed_current + VERTICAL_MOVE {
 
                 const HORIZONTAL_OR_VERTICAL_MOVE: u8 = 10;
-                node.set_cost(HORIZONTAL_OR_VERTICAL_MOVE);
-
-                continue;
+                cost = HORIZONTAL_OR_VERTICAL_MOVE;
             }
 
-            const DIAGONAL_MOVE: u8 = 14;
-            node.set_cost(DIAGONAL_MOVE);
+            node.set_cost(current_cost + cost);
         }
     }
 
