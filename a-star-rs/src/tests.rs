@@ -316,6 +316,9 @@ mod tests {
         nodes.get_node_by_index(15)
             .set_unusuable();
 
+        nodes.get_node_by_index(25)
+            .set_unusuable();
+
         nodes.generate_heuristics();
         nodes.generate_children_list();
         nodes.update_open_list();
@@ -412,6 +415,34 @@ mod tests {
             nodes.get_current_index(),
             19,
             "unexpected current",
+        );
+
+        nodes.generate_children_list();
+
+        let mut children = nodes.get_children_list();
+        children.sort_by(|a, b| a.cmp(b));
+
+        assert_eq!(
+            children,
+            [12, 13, 14, 18, 20, 24, 25, 26],
+            "unexpected children",
+        );
+
+        nodes.update_open_list();
+
+        let mut open_list = nodes.get_open_list();
+        open_list.sort_by(|a, b| a.cmp(b));
+
+        assert_eq!(
+            open_list,
+            [6, 7, 8, 9, 12, 18, 20, 21, 24, 26],
+            "unexpected open list",
+        );
+
+        assert_eq!(
+            nodes.get_closed_list(),
+            [13, 14, 19],
+            "unexpected closed list",
         );
     }
 }
