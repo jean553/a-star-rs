@@ -219,6 +219,8 @@ impl Nodes {
     /// Iterates to the next node and remove the target from the open list.
     pub fn iterate(&mut self) {
 
+        // FIXME: #55 limits the capacities of the algorithm,
+        // check if there is a better way to handle this `initial` value
         let mut minimum: u8 = <u8>::max_value();
         let mut target: usize = 0;
 
