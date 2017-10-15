@@ -264,19 +264,17 @@ impl Nodes {
     /// Sets the open list as the children list.
     pub fn update_open_list(&mut self) {
 
-        let open_list = &mut self.open_list;
-
         for child in self.children_list.iter() {
 
             if
-                open_list.contains(child) ||
+                self.open_list.contains(child) ||
                 self.closed_list.contains(child) ||
                 !self.nodes[*child].is_usuable()
             {
                 continue;
             }
 
-            open_list.push(*child);
+            self.open_list.push(*child);
         }
     }
 
