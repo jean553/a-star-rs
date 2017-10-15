@@ -219,14 +219,13 @@ impl Nodes {
     /// Iterates to the next node and remove the target from the open list.
     pub fn iterate(&mut self) {
 
+        // FIXME: #55 limits the capacities of the algorithm,
+        // check if there is a better way to handle this `initial` value
         let mut minimum: u8 = <u8>::max_value();
+
         let mut target: usize = 0;
 
         for index in self.open_list.iter() {
-
-            if self.closed_list.contains(index) {
-                continue;
-            }
 
             let node = &self.nodes[*index];
             let value = node.get_heuristic() + node.get_cost();
@@ -237,7 +236,9 @@ impl Nodes {
             }
         }
 
+        // FIXME: #55 incorrect behaviour if no path is found
         self.current = target;
+
         self.open_list.remove_item(&target);
         self.closed_list.push(target);
     }
