@@ -12,6 +12,7 @@ Library that implements A-star algorithm.
     * [Heurtistics generation](#heuristics-generation)
     * [Children nodes](#children-nodes)
     * [Open list update](#open-list-update)
+    * [Costs generation](#costs-generation)
 
 ## Development
 
