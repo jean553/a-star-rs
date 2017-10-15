@@ -67,6 +67,9 @@ The following code can be used to generate the heuristics. A node heuristic
 is the distance (in nodes) from the current node to the arrival node.
 The nodes around the destination node have an heuristic of 1.
 
+The heuristics are generated using the distance formula
+derived from the Pythagorean theorem.
+
 ```rust
 nodes.generate_heuristics();
 ```
