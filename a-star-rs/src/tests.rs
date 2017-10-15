@@ -302,10 +302,10 @@ mod tests {
 
         // TODO: #58 implement the complete search test
 
-        const WIDTH: u8 = 4;
-        const HEIGHT: u8 = 4;
-        const FIRST_DEPARTURE_INDEX: usize = 0;
-        const FIRST_ARRIVAL_INDEX: usize = 11;
+        const WIDTH: u8 = 6;
+        const HEIGHT: u8 = 6;
+        const FIRST_DEPARTURE_INDEX: usize = 13;
+        const FIRST_ARRIVAL_INDEX: usize = 34;
         let mut nodes = Nodes::new(
             WIDTH,
             HEIGHT,
@@ -313,25 +313,31 @@ mod tests {
             FIRST_ARRIVAL_INDEX,
         );
 
+        nodes.get_node_by_index(15)
+            .set_unusuable();
+
         nodes.generate_heuristics();
         nodes.generate_children_list();
         nodes.update_open_list();
         nodes.generate_costs();
 
+        let mut open_list = nodes.get_open_list();
+        open_list.sort_by(|a, b| a.cmp(b));
+
         assert_eq!(
-            nodes.get_open_list(),
-            [1, 4, 5],
+            open_list,
+            [6, 7, 8, 12, 14, 18, 19, 20],
             "unexpected open list",
         );
 
         assert_eq!(
             nodes.get_closed_list(),
-            [0],
+            [13],
             "unexpected closed list",
         );
 
         assert_eq!(
-            nodes.get_node_by_index(4)
+            nodes.get_node_by_index(14)
                 .get_cost(),
             10,
             "unexpected cost",
@@ -343,19 +349,22 @@ mod tests {
 
         assert_eq!(
             nodes.get_current_index(),
-            1,
+            14,
             "unexpected current",
         );
 
+        let mut open_list = nodes.get_open_list();
+        open_list.sort_by(|a, b| a.cmp(b));
+
         assert_eq!(
-            nodes.get_open_list(),
-            [4, 5],
+            open_list,
+            [6, 7, 8, 12, 18, 19, 20],
             "unexpected open list",
         );
 
         assert_eq!(
             nodes.get_closed_list(),
-            [0, 1],
+            [13, 14],
             "unexpected closed list",
         );
 
@@ -366,7 +375,7 @@ mod tests {
 
         assert_eq!(
             children,
-            [0, 2, 4, 5, 6],
+            [7, 8, 9, 13, 15, 19, 20, 21],
             "unexpected children",
         );
 
@@ -377,28 +386,21 @@ mod tests {
 
         assert_eq!(
             open_list,
-            [2, 4, 5, 6],
+            [6, 7, 8, 9, 12, 18, 19, 20, 21],
             "unexpected open list",
         );
 
         nodes.generate_costs();
 
         assert_eq!(
-            nodes.get_node_by_index(2)
+            nodes.get_node_by_index(21)
                 .get_cost(),
-            20,
+            24,
             "unexpected cost",
         );
 
         assert_eq!(
-            nodes.get_node_by_index(4)
-                .get_cost(),
-            10,
-            "unexpected cost",
-        );
-
-        assert_eq!(
-            nodes.get_node_by_index(6)
+            nodes.get_node_by_index(9)
                 .get_cost(),
             24,
             "unexpected cost",
@@ -408,7 +410,7 @@ mod tests {
 
         assert_eq!(
             nodes.get_current_index(),
-            4,
+            19,
             "unexpected current",
         );
     }
