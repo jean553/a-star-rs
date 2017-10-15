@@ -70,3 +70,17 @@ The nodes around the destination node have an heuristic of 1.
 ```rust
 nodes.generate_heuristics();
 ```
+
+At anytime of the iteration, there is always a `current node`,
+which is the current position of the research pointer.
+The value of the current index can be changed with the method
+`set_current()`.
+
+Furthermore, every node has children. The children of one node
+are all the nodes around him. The children nodes list is generated
+according to the current node index.
+
+```rust
+nodes.set_current(0);
+nodes.generate_children_list(); // children list is [1, 10, 11]
+```
