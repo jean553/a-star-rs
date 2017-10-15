@@ -13,6 +13,7 @@ Library that implements A-star algorithm.
     * [Children nodes](#children-nodes)
     * [Open list update](#open-list-update)
     * [Costs generation](#costs-generation)
+    * [Iteration](#iteration)
 
 ## Development
 
@@ -132,4 +133,15 @@ of the current node.
 
 ```rust
 nodes.generate_costs();
+```
+
+### Iteration
+
+During an iteration, one movement occurs. In order to choose one which node
+the movement is done, the score of each child node is calculated.
+The score is the sum of the cost and the heuristic.
+The node (or the first node) with the smallest score is chosen for the move.
+
+```rust
+nodes.iterate();
 ```
