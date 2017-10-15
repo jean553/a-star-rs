@@ -257,7 +257,7 @@ mod tests {
 
         assert_eq!(
             nodes.get_current_index(),
-            2,
+            10,
             "unexpected current",
         );
     }
@@ -302,10 +302,10 @@ mod tests {
 
         // TODO: #58 implement the complete search test
 
-        const WIDTH: u8 = 5;
-        const HEIGHT: u8 = 5;
+        const WIDTH: u8 = 4;
+        const HEIGHT: u8 = 4;
         const FIRST_DEPARTURE_INDEX: usize = 0;
-        const FIRST_ARRIVAL_INDEX: usize = 24;
+        const FIRST_ARRIVAL_INDEX: usize = 11;
         let mut nodes = Nodes::new(
             WIDTH,
             HEIGHT,
@@ -320,7 +320,7 @@ mod tests {
 
         assert_eq!(
             nodes.get_open_list(),
-            [1, 5, 6],
+            [1, 4, 5],
             "unexpected open list",
         );
 
@@ -328,6 +328,13 @@ mod tests {
             nodes.get_closed_list(),
             [0],
             "unexpected closed list",
+        );
+
+        assert_eq!(
+            nodes.get_node_by_index(4)
+                .get_cost(),
+            10,
+            "unexpected cost",
         );
 
         // first iteration
@@ -342,7 +349,7 @@ mod tests {
 
         assert_eq!(
             nodes.get_open_list(),
-            [5, 6],
+            [4, 5],
             "unexpected open list",
         );
 
@@ -359,7 +366,7 @@ mod tests {
 
         assert_eq!(
             children,
-            [0, 2, 5, 6, 7],
+            [0, 2, 4, 5, 6],
             "unexpected children",
         );
 
@@ -370,7 +377,7 @@ mod tests {
 
         assert_eq!(
             open_list,
-            [2, 5, 6, 7],
+            [2, 4, 5, 6],
             "unexpected open list",
         );
 
@@ -384,10 +391,25 @@ mod tests {
         );
 
         assert_eq!(
-            nodes.get_node_by_index(7)
+            nodes.get_node_by_index(4)
+                .get_cost(),
+            10,
+            "unexpected cost",
+        );
+
+        assert_eq!(
+            nodes.get_node_by_index(6)
                 .get_cost(),
             24,
             "unexpected cost",
+        );
+
+        nodes.iterate();
+
+        assert_eq!(
+            nodes.get_current_index(),
+            4,
+            "unexpected current",
         );
     }
 }

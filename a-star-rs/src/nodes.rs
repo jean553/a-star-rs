@@ -189,16 +189,20 @@ impl Nodes {
             let signed_index = *index as i8;
             let node = &mut self.nodes[*index];
 
-            const HORIZONTAL_MOVE: i8 = 1;
-            const VERTICAL_MOVE: i8 = 10;
+            if node.get_cost() != 0 {
+                continue;
+            }
 
             const DIAGONAL_MOVE: u8 = 14;
             let mut cost = DIAGONAL_MOVE;
 
+            const HORIZONTAL_MOVE: i8 = 1;
+            let map_width = self.width as i8;
+
             if signed_index == signed_current - HORIZONTAL_MOVE ||
                 signed_index == signed_current + HORIZONTAL_MOVE ||
-                signed_index == signed_current - VERTICAL_MOVE ||
-                signed_index == signed_current + VERTICAL_MOVE {
+                signed_index == signed_current - map_width ||
+                signed_index == signed_current + map_width {
 
                 const HORIZONTAL_OR_VERTICAL_MOVE: u8 = 10;
                 cost = HORIZONTAL_OR_VERTICAL_MOVE;
