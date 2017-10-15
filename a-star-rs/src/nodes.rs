@@ -83,7 +83,7 @@ impl Nodes {
         }
     }
 
-    /// Generates the open list of children for the current index.
+    /// Generates the list of children for the current index.
     pub fn generate_children_list(&mut self) {
 
         let mut children: Vec<usize> = Vec::new();

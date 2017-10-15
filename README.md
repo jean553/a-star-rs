@@ -82,5 +82,6 @@ according to the current node index.
 
 ```rust
 nodes.set_current(0);
-nodes.generate_children_list(); // children list is [1, 10, 11]
+nodes.generate_children_list();
+nodes.get_children_list(); // [1, 10, 11]
 ```
