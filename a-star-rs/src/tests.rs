@@ -295,26 +295,5 @@ mod tests {
             [10, 11],
             "unexpected open list",
         );
-
-        nodes.generate_costs();
-        nodes.iterate();
-
-        nodes.generate_children_list();
-        nodes.update_open_list();
-
-        assert_eq!(
-            nodes.get_closed_list(),
-            [0, 1],
-            "unexpected closed list",
-        );
-
-        let mut open_list = nodes.get_open_list();
-        open_list.sort_by(|a, b| a.cmp(b));
-
-        assert_eq!(
-            open_list,
-            [2, 10, 11, 12],
-            "unexpected open list",
-        );
     }
 }
