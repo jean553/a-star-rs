@@ -296,4 +296,34 @@ mod tests {
             "unexpected open list",
         );
     }
+
+    #[test]
+    fn test_complete_research() {
+
+        // TODO: #58 implement the complete search test
+
+        const WIDTH: u8 = 5;
+        const HEIGHT: u8 = 5;
+        const FIRST_DEPARTURE_INDEX: usize = 0;
+        const FIRST_ARRIVAL_INDEX: usize = 24;
+        let mut nodes = Nodes::new(
+            WIDTH,
+            HEIGHT,
+            FIRST_DEPARTURE_INDEX,
+            FIRST_ARRIVAL_INDEX,
+        );
+
+        nodes.generate_heuristics();
+        nodes.generate_children_list();
+        nodes.update_open_list();
+        nodes.generate_costs();
+        nodes.iterate();
+
+        assert_eq!(
+            nodes.get_current(),
+            1,
+            "unexpected current",
+        );
+
+    }
 }
