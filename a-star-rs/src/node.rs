@@ -30,6 +30,15 @@ impl Node {
         self.usuable = false;
     }
 
+    /// Indicates if the node is usuable or not.
+    ///
+    /// # Returns:
+    ///
+    /// True if the node is usuable.
+    pub fn is_usuable(&self) -> bool {
+        self.usuable
+    }
+
     /// Sets the node heuristic.
     ///
     /// # Arguments:
