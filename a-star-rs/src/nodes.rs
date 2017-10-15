@@ -222,13 +222,10 @@ impl Nodes {
         // FIXME: #55 limits the capacities of the algorithm,
         // check if there is a better way to handle this `initial` value
         let mut minimum: u8 = <u8>::max_value();
+
         let mut target: usize = 0;
 
         for index in self.open_list.iter() {
-
-            if self.closed_list.contains(index) {
-                continue;
-            }
 
             let node = &self.nodes[*index];
             let value = node.get_heuristic() + node.get_cost();
