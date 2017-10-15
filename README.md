@@ -88,3 +88,11 @@ nodes.set_current(0);
 nodes.generate_children_list();
 nodes.get_children_list(); // [1, 10, 11]
 ```
+
+The open list contains the indices that have to be considered in order
+to find the appropriate path. The open list have to be updated according
+to the children list.
+
+```rust
+nodes.update_open_list();
+```
