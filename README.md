@@ -4,6 +4,10 @@
 
 Library that implements A-star algorithm.
 
+- [Development](#development)
+- [Usage](#usage)
+    * [Grid creation](#grid-creation)
+
 ## Development
 
 Start the docker container.
@@ -31,6 +35,8 @@ cargo rustdoc -- --no-defaults
 ```
 
 ## Usage
+
+### Grid creation
 
 Create a nodes grid by giving the dimensions, the departure cell index
 and the arrival cell index.
