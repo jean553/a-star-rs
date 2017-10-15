@@ -60,8 +60,10 @@ An unusuable node is not considered at all and
 cannot be part of the final path.
 
 ```rust
-nodes.get_node_by_index(23).set_unusuable();
+nodes.get_node_by_index(1).set_unusuable();
 ```
+
+Note: an unusuable node is never part of the closed list.
 
 The following code can be used to generate the heuristics. A node heuristic
 is the distance (in nodes) from the current node to the arrival node.
@@ -94,5 +96,5 @@ to find the appropriate path. The open list have to be updated according
 to the children list.
 
 ```rust
-nodes.update_open_list();
+nodes.update_open_list(); // [10, 11]
 ```
