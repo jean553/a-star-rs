@@ -268,6 +268,7 @@ impl Nodes {
 
         for child in self.children_list.iter() {
 
+            // TODO: #48 an unusuable node should not be part of the open list
             if open_list.contains(child) || self.closed_list.contains(child) {
                 continue;
             }
