@@ -119,3 +119,16 @@ to the children list.
 ```rust
 nodes.update_open_list(); // [10, 11]
 ```
+
+### Costs generation
+
+Every move from the current node to a child node has a cost.
+In this example, the cost is 10 for a horizontal or vertical movement,
+and 14 for a diagonal movement.
+
+The following line of code generates the costs of every children
+of the current node.
+
+```rust
+nodes.generate_costs();
+```
