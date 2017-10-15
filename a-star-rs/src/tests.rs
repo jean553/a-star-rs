@@ -317,6 +317,21 @@ mod tests {
         nodes.generate_children_list();
         nodes.update_open_list();
         nodes.generate_costs();
+
+        assert_eq!(
+            nodes.get_open_list(),
+            [1, 5, 6],
+            "unexpected open list",
+        );
+
+        assert_eq!(
+            nodes.get_closed_list(),
+            [0],
+            "unexpected closed list",
+        );
+
+        // first iteration
+
         nodes.iterate();
 
         assert_eq!(
@@ -325,5 +340,27 @@ mod tests {
             "unexpected current",
         );
 
+        assert_eq!(
+            nodes.get_open_list(),
+            [5, 6],
+            "unexpected open list",
+        );
+
+        assert_eq!(
+            nodes.get_closed_list(),
+            [0, 1],
+            "unexpected closed list",
+        );
+
+        nodes.generate_children_list();
+
+        let mut children = nodes.get_children_list();
+        children.sort_by(|a, b| a.cmp(b));
+
+        assert_eq!(
+            children,
+            [0, 2, 5, 6, 7],
+            "unexpected children",
+        );
     }
 }
