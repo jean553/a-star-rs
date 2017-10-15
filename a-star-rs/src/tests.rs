@@ -373,5 +373,21 @@ mod tests {
             [2, 5, 6, 7],
             "unexpected open list",
         );
+
+        nodes.generate_costs();
+
+        assert_eq!(
+            nodes.get_node_by_index(2)
+                .get_cost(),
+            20,
+            "unexpected cost",
+        );
+
+        assert_eq!(
+            nodes.get_node_by_index(7)
+                .get_cost(),
+            24,
+            "unexpected cost",
+        );
     }
 }
