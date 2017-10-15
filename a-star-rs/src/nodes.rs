@@ -178,10 +178,10 @@ impl Nodes {
         self.open_list.clone()
     }
 
-    /// Generates the costs of the children of the open list.
+    /// Generates the costs of the open list nodes.
     pub fn generate_costs(&mut self) {
 
-        let signed_departure = self.current as i8;
+        let signed_current = self.current as i8;
 
         for index in self.open_list.iter() {
 
@@ -191,13 +191,14 @@ impl Nodes {
             const HORIZONTAL_MOVE: i8 = 1;
             const VERTICAL_MOVE: i8 = 10;
 
-            if signed_index == signed_departure - HORIZONTAL_MOVE ||
-                signed_index == signed_departure + HORIZONTAL_MOVE ||
-                signed_index == signed_departure - VERTICAL_MOVE ||
-                signed_index == signed_departure + VERTICAL_MOVE {
+            if signed_index == signed_current - HORIZONTAL_MOVE ||
+                signed_index == signed_current + HORIZONTAL_MOVE ||
+                signed_index == signed_current - VERTICAL_MOVE ||
+                signed_index == signed_current + VERTICAL_MOVE {
 
                 const HORIZONTAL_OR_VERTICAL_MOVE: u8 = 10;
                 node.set_cost(HORIZONTAL_OR_VERTICAL_MOVE);
+
                 continue;
             }
 
