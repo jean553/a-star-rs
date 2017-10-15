@@ -66,6 +66,7 @@ impl Nodes {
         ) = self.get_positions(self.arrival);
 
         let nodes_copy = self.clone();
+
         for (counter, node) in self.nodes.iter_mut().enumerate() {
 
             let (
@@ -264,17 +265,17 @@ impl Nodes {
     /// Sets the open list as the children list.
     pub fn update_open_list(&mut self) {
 
-        for child in self.children_list.iter() {
+        for index in self.children_list.iter() {
 
             if
-                self.open_list.contains(child) ||
-                self.closed_list.contains(child) ||
-                !self.nodes[*child].is_usuable()
+                self.open_list.contains(index) ||
+                self.closed_list.contains(index) ||
+                !self.nodes[*index].is_usuable()
             {
                 continue;
             }
 
-            self.open_list.push(*child);
+            self.open_list.push(*index);
         }
     }
 
