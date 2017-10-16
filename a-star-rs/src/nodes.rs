@@ -14,7 +14,6 @@ pub struct Nodes {
     open_list: Vec<usize>,
     closed_list: Vec<usize>,
     children_list: Vec<usize>,
-    final_node: Option<usize>,
 }
 
 #[allow(dead_code)]
@@ -55,7 +54,6 @@ impl Nodes {
             open_list: Vec::new(),
             closed_list: vec![departure],
             children_list: Vec::new(),
-            final_node: None,
         }
     }
 
@@ -224,7 +222,7 @@ impl Nodes {
     }
 
     /// Iterates to the next node and remove the target from the open list.
-    pub fn iterate(&mut self) {
+    pub fn iterate(&mut self) -> Option<usize> {
 
         // FIXME: #55 limits the capacities of the algorithm,
         // check if there is a better way to handle this `initial` value
@@ -238,7 +236,7 @@ impl Nodes {
             let heuristic = node.get_heuristic();
 
             if heuristic == 1 {
-                self.final_node = Some(*index);
+                Some(*index);
             }
 
             let value = heuristic + node.get_cost();
@@ -258,6 +256,8 @@ impl Nodes {
 
         self.open_list.remove_item(&target);
         self.closed_list.push(target);
+
+        None
     }
 
     /// Getter for the current index.
