@@ -14,6 +14,7 @@ pub struct Nodes {
     open_list: Vec<usize>,
     closed_list: Vec<usize>,
     children_list: Vec<usize>,
+    final_node: Option<usize>,
 }
 
 #[allow(dead_code)]
@@ -54,6 +55,7 @@ impl Nodes {
             open_list: Vec::new(),
             closed_list: vec![departure],
             children_list: Vec::new(),
+            final_node: None,
         }
     }
 
@@ -233,7 +235,13 @@ impl Nodes {
         for index in self.open_list.iter() {
 
             let node = &self.nodes[*index];
-            let value = node.get_heuristic() + node.get_cost();
+            let heuristic = node.get_heuristic();
+
+            if heuristic == 1 {
+                self.final_node = Some(*index);
+            }
+
+            let value = heuristic + node.get_cost();
 
             if value < minimum {
                 minimum = value;
