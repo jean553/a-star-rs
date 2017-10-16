@@ -445,4 +445,37 @@ mod tests {
             "unexpected closed list",
         );
     }
+
+    #[test]
+    fn test_research_api() {
+
+        const WIDTH: u8 = 6;
+        const HEIGHT: u8 = 6;
+        const FIRST_DEPARTURE_INDEX: usize = 13;
+        const FIRST_ARRIVAL_INDEX: usize = 34;
+        let mut nodes = Nodes::new(
+            WIDTH,
+            HEIGHT,
+            FIRST_DEPARTURE_INDEX,
+            FIRST_ARRIVAL_INDEX,
+        );
+
+        nodes.get_node_by_index(15)
+            .set_unusuable();
+
+        nodes.get_node_by_index(25)
+            .set_unusuable();
+
+        nodes.get_node_by_index(27)
+            .set_unusuable();
+
+        nodes.get_node_by_index(33)
+            .set_unusuable();
+
+        assert_eq!(
+            nodes.research_path(),
+            28,
+            "unexpected final node index",
+        );
+    }
 }

@@ -57,6 +57,25 @@ impl Nodes {
         }
     }
 
+    /// Main research method
+    pub fn research_path(&mut self) -> usize {
+
+        let mut final_node: Option<usize> = None;
+
+        self.generate_heuristics();
+
+        while final_node.is_none() {
+
+            self.generate_children_list();
+            self.update_open_list();
+            self.generate_costs();
+
+            final_node = self.iterate();
+        }
+        
+        final_node.unwrap()
+    }
+
     /// Generate the heuristics of every node from departure and arrival.
     pub fn generate_heuristics(&mut self) {
 
@@ -240,7 +259,7 @@ impl Nodes {
             let heuristic = node.get_heuristic();
 
             if heuristic == 1 {
-                Some(*index);
+                return Some(*index);
             }
 
             let value = heuristic + node.get_cost();
