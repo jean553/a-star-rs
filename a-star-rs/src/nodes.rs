@@ -222,6 +222,10 @@ impl Nodes {
     }
 
     /// Iterates to the next node and remove the target from the open list.
+    ///
+    /// Returns:
+    ///
+    /// The index of the final node if found, or None
     pub fn iterate(&mut self) -> Option<usize> {
 
         // FIXME: #55 limits the capacities of the algorithm,
