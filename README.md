@@ -143,5 +143,25 @@ The score is the sum of the cost and the heuristic.
 The node (or the first node) with the smallest score is chosen for the move.
 
 ```rust
-nodes.iterate();
+let last_node_index = nodes.iterate();
 ```
+
+The `iterate` function returns an `Option` object.
+It returns `None` if the destination has not been found yet
+and the iterations must continue.
+It returns the index of a node with an heuristic equal to 1
+(child of the destination node, so the destination has been found).
+
+### Backward movement generation
+
+After every iteration, the current node backward movement argument value
+is updated. This value is the movement to perform within the path
+to go from the destination node to the departure node. This value is used
+at the end of the process once the destination has been found.
+
+If the current node is a child of the departure node, the backward movement
+value is the one required to go directly to the departure node.
+
+If the current node is not a child of the departure node,
+then the child node of the current one with the smaller cost value
+is considered.
