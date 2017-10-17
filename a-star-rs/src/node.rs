@@ -7,6 +7,7 @@ pub struct Node {
     heuristic: u8,
     cost: u8,
     usuable: bool,
+    backward_movement: i8,
 }
 
 #[allow(dead_code)]
@@ -22,6 +23,7 @@ impl Node {
             heuristic: 0,
             cost: 0,
             usuable: true,
+            backward_movement: 0,
         }
     }
 
