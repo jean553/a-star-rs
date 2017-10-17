@@ -85,9 +85,9 @@ impl Node {
 
     /// Setter for the backward movement.
     ///
-    /// # Returns:
+    /// # Arguments:
     ///
-    /// The backward movement.
+    /// * `backward_movement` - the backward movement
     pub fn set_backward_movement(
         &mut self,
         backward_movement: i8,
