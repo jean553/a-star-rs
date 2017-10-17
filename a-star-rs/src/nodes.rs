@@ -65,14 +65,17 @@ impl Nodes {
         let mut final_node: Option<usize> = None;
 
         self.generate_heuristics();
+        self.generate_children_list();
 
         while final_node.is_none() {
 
-            self.generate_children_list();
             self.update_open_list();
             self.generate_costs();
 
             final_node = self.iterate();
+
+            self.generate_children_list();
+            self.generate_backward_movement();
         }
         
         final_node.unwrap()
