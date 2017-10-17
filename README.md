@@ -14,6 +14,7 @@ Library that implements A-star algorithm.
     * [Open list update](#open-list-update)
     * [Costs generation](#costs-generation)
     * [Iteration](#iteration)
+    * [Backward movement generation](#backward-movement-generation)
 
 ## Development
 
