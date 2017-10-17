@@ -82,4 +82,16 @@ impl Node {
     pub fn get_cost(&self) -> u8 {
         self.cost
     }
+
+    /// Setter for the backward movement.
+    ///
+    /// # Returns:
+    ///
+    /// The backward movement.
+    pub fn set_backward_movement(
+        &mut self,
+        backward_movement: i8,
+    ) {
+        self.backward_movement = backward_movement;
+    }
 }
