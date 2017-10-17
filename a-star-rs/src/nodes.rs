@@ -9,6 +9,7 @@ pub struct Nodes {
     width: u8,
     height: u8,
     nodes: Vec<Node>,
+    departure_index: usize,
     current_index: usize,
     arrival_index: usize,
     open_list: Vec<usize>,
@@ -49,6 +50,7 @@ impl Nodes {
             width: width,
             height: height,
             nodes: nodes,
+            departure_index: departure,
             current_index: departure,
             arrival_index: arrival,
             open_list: Vec::new(),
@@ -63,14 +65,17 @@ impl Nodes {
         let mut final_node: Option<usize> = None;
 
         self.generate_heuristics();
+        self.generate_children_list();
 
         while final_node.is_none() {
 
-            self.generate_children_list();
             self.update_open_list();
             self.generate_costs();
 
             final_node = self.iterate();
+
+            self.generate_children_list();
+            self.generate_backward_movement();
         }
         
         final_node.unwrap()
@@ -384,5 +389,26 @@ impl Nodes {
         vertical_position: u8,
     ) -> usize {
         (vertical_position * self.width + horizontal_position) as usize
+    }
+
+    /// Generates the backward movement of the current index.
+    fn generate_backward_movement(&mut self) {
+
+        let mut backward_movement: i8 = 0;
+        let current_index = self.current_index as i8;
+        let departure_index = self.departure_index as i8;
+
+        if self.children_list.contains(&self.departure_index) {
+            backward_movement = departure_index - current_index;
+        }
+
+        // FIXME: #71 the function currently only set a backward movement
+        // different than 0 if the current index has the departure index
+        // in its children; the second part of the function must be defined
+
+        let index = self.current_index;
+        let mut current_node = self.get_node_by_index(index);
+
+        current_node.set_backward_movement(backward_movement);
     }
 }

@@ -7,6 +7,7 @@ pub struct Node {
     heuristic: u8,
     cost: u8,
     usuable: bool,
+    backward_movement: i8,
 }
 
 #[allow(dead_code)]
@@ -22,6 +23,7 @@ impl Node {
             heuristic: 0,
             cost: 0,
             usuable: true,
+            backward_movement: 0,
         }
     }
 
@@ -79,5 +81,17 @@ impl Node {
     /// The node movement cost.
     pub fn get_cost(&self) -> u8 {
         self.cost
+    }
+
+    /// Setter for the backward movement.
+    ///
+    /// # Arguments:
+    ///
+    /// * `backward_movement` - the backward movement
+    pub fn set_backward_movement(
+        &mut self,
+        backward_movement: i8,
+    ) {
+        self.backward_movement = backward_movement;
     }
 }
