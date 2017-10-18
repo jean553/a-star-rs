@@ -482,6 +482,46 @@ mod tests {
             -1,
             "unexpected backward movement",
         );
+
+        // perform four iterations
+        for _ in 0..4 {
+            nodes.update_open_list();
+            nodes.generate_costs();
+            nodes.iterate();
+            nodes.generate_children_list();
+            nodes.generate_backward_movement();
+        }
+
+        assert_eq!(
+            nodes.get_node_by_index(19)
+                .get_backward_movement(),
+            -6,
+            "unexpected backward movement",
+        );
+
+        assert_eq!(
+            nodes.get_node_by_index(7)
+                .get_backward_movement(),
+            6,
+            "unexpected backward movement",
+        );
+
+        assert_eq!(
+            nodes.get_node_by_index(12)
+                .get_backward_movement(),
+            1,
+            "unexpected backward movement",
+        );
+
+        assert_eq!(
+            nodes.get_node_by_index(20)
+                .get_backward_movement(),
+            -7, // - 6 - 1
+            "unexpected backward movement",
+        );
+
+        // FIXME: #76 should work with all the children
+        // of the departure cell
     }
 
     #[test]
