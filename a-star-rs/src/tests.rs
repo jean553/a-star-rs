@@ -466,15 +466,24 @@ mod tests {
         nodes.get_node_by_index(25)
             .set_unusuable();
 
+        nodes.get_node_by_index(27)
+            .set_unusuable();
+
+        nodes.get_node_by_index(33)
+            .set_unusuable();
 
         // research method simulation
         nodes.generate_heuristics();
         nodes.generate_children_list();
-        nodes.update_open_list();
-        nodes.generate_costs();
-        nodes.iterate();
-        nodes.generate_children_list();
-        nodes.generate_backward_movement();
+
+        // perform height iterations
+        for _ in 0..8 {
+            nodes.update_open_list();
+            nodes.generate_costs();
+            nodes.iterate();
+            nodes.generate_children_list();
+            nodes.generate_backward_movement();
+        }
 
         assert_eq!(
             nodes.get_node_by_index(14)
@@ -482,15 +491,6 @@ mod tests {
             -1,
             "unexpected backward movement",
         );
-
-        // perform four iterations
-        for _ in 0..4 {
-            nodes.update_open_list();
-            nodes.generate_costs();
-            nodes.iterate();
-            nodes.generate_children_list();
-            nodes.generate_backward_movement();
-        }
 
         assert_eq!(
             nodes.get_node_by_index(19)
@@ -520,8 +520,26 @@ mod tests {
             "unexpected backward movement",
         );
 
-        // FIXME: #76 should work with all the children
-        // of the departure cell
+        assert_eq!(
+            nodes.get_node_by_index(8)
+                .get_backward_movement(),
+            5, // 6 - 1
+            "unexpected backward movement",
+        );
+
+        assert_eq!(
+            nodes.get_node_by_index(18)
+                .get_backward_movement(),
+            -5, // - 6 + 1
+            "unexpected backward movement",
+        );
+
+        assert_eq!(
+            nodes.get_node_by_index(6)
+                .get_backward_movement(),
+            7, // + 6 + 1
+            "unexpected backward movement",
+        );
     }
 
     #[test]
