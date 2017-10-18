@@ -447,6 +447,44 @@ mod tests {
     }
 
     #[test]
+    fn test_backward_movement() {
+
+        const WIDTH: u8 = 6;
+        const HEIGHT: u8 = 6;
+        const FIRST_DEPARTURE_INDEX: usize = 13;
+        const FIRST_ARRIVAL_INDEX: usize = 34;
+        let mut nodes = Nodes::new(
+            WIDTH,
+            HEIGHT,
+            FIRST_DEPARTURE_INDEX,
+            FIRST_ARRIVAL_INDEX,
+        );
+
+        nodes.get_node_by_index(15)
+            .set_unusuable();
+
+        nodes.get_node_by_index(25)
+            .set_unusuable();
+
+
+        // research method simulation
+        nodes.generate_heuristics();
+        nodes.generate_children_list();
+        nodes.update_open_list();
+        nodes.generate_costs();
+        nodes.iterate();
+        nodes.generate_children_list();
+        nodes.generate_backward_movement();
+
+        assert_eq!(
+            nodes.get_node_by_index(14)
+                .get_backward_movement(),
+            -1,
+            "unexpected backward movement",
+        );
+    }
+
+    #[test]
     fn test_research_api() {
 
         const WIDTH: u8 = 6;

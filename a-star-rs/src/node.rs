@@ -94,4 +94,13 @@ impl Node {
     ) {
         self.backward_movement = backward_movement;
     }
+
+    /// Getter of the backward movement.
+    ///
+    /// # Returns:
+    ///
+    /// The backward movement of the node.
+    pub fn get_backward_movement(&self) -> i8 {
+        self.backward_movement
+    }
 }
