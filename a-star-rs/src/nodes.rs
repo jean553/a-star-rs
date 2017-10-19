@@ -354,13 +354,8 @@ impl Nodes {
     /// Generates the backward movement of the current index.
     pub fn generate_backward_movement(&mut self) {
 
-        let mut backward_movement: i8 = 0;
         let current_index = self.current_index as i8;
         let departure_index = self.departure_index as i8;
-
-        if self.children_list.contains(&self.departure_index) {
-            backward_movement = departure_index - current_index;
-        }
 
         // FIXME: #71 the function currently only set a backward movement
         // different than 0 if the current index has the departure index
@@ -369,6 +364,7 @@ impl Nodes {
         let index = self.current_index;
         let mut current_node = self.get_node_by_index(index);
 
+        let backward_movement = departure_index - current_index;
         current_node.set_backward_movement(backward_movement);
     }
 
