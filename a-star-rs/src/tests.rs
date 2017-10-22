@@ -477,7 +477,7 @@ mod tests {
         nodes.generate_children_list();
 
         // perform height iterations
-        for _ in 0..8 {
+        for _ in 0..11 {
             nodes.update_open_list();
             nodes.generate_costs();
             nodes.iterate();
@@ -538,6 +538,27 @@ mod tests {
             nodes.get_node_by_index(6)
                 .get_backward_movement(),
             7, // + 6 + 1
+            "unexpected backward movement",
+        );
+
+        assert_eq!(
+            nodes.get_node_by_index(1)
+                .get_backward_movement(),
+            6,
+            "unexpected backward movement",
+        );
+
+        assert_eq!(
+            nodes.get_node_by_index(21)
+                .get_backward_movement(),
+            -7, // - 6 - 1
+            "unexpected backward movement",
+        );
+
+        assert_eq!(
+            nodes.get_node_by_index(28)
+                .get_backward_movement(),
+            -7, // - 6 - 1
             "unexpected backward movement",
         );
     }
