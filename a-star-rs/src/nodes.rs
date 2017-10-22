@@ -67,6 +67,10 @@ impl Nodes {
         self.generate_heuristics();
         self.generate_children_list();
 
+        // FIXME: #83 the library should be able to handle
+        // the situation when there is no available path,
+        // for now, it simply continuously loops
+
         loop {
 
             self.update_open_list();
