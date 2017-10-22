@@ -594,5 +594,12 @@ mod tests {
             28,
             "unexpected final node index",
         );
+
+        assert_eq!(
+            nodes.get_node_by_index(34)
+                .get_backward_movement(),
+            -6,
+            "unexpected backward movement",
+        );
     }
 }
