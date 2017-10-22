@@ -60,39 +60,52 @@ impl Nodes {
     }
 
     /// Main research method
-    pub fn research_path(&mut self) -> usize {
+    pub fn research_path(&mut self) -> Vec<usize> {
 
         let mut final_index: Option<usize> = None;
 
         self.generate_heuristics();
         self.generate_children_list();
 
-        // FIXME: #83 the library should be able to handle
-        // the situation when there is no available path,
-        // for now, it simply continuously loops
-
-        loop {
+        while final_index.is_none() {
 
             self.update_open_list();
             self.generate_costs();
 
             final_index = self.iterate();
 
-            if self.iterate().is_some() {
-                break;
-            }
-
             self.generate_children_list();
             self.generate_backward_movement();
         }
-        
+
         let final_index = final_index.unwrap();
 
         let arrival_index = self.arrival_index;
         self.get_node_by_index(arrival_index)
             .set_backward_movement(final_index as i8 - arrival_index as i8);
 
-        final_index
+        let mut path = Vec::new();
+        path.push(self.arrival_index);
+
+        let mut current_index = self.arrival_index;
+
+        loop {
+
+            current_index = (
+                current_index as i8 +
+                self.get_node_by_index(current_index)
+                    .get_backward_movement()
+            ) as usize;
+
+            if current_index == self.departure_index {
+                break;
+            }
+
+            path.push(current_index);
+        }
+
+        path.reverse();
+        path
     }
 
     /// Generate the heuristics of every node from departure and arrival.
