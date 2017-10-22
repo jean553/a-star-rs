@@ -78,33 +78,29 @@ impl Nodes {
             self.generate_backward_movement();
         }
 
-        let final_index = final_index.unwrap();
-
         let arrival_index = self.arrival_index;
         self.get_node_by_index(arrival_index)
-            .set_backward_movement(final_index as i8 - arrival_index as i8);
+            .set_backward_movement(
+                final_index.unwrap() as i8 -
+                arrival_index as i8
+            );
 
         let mut path = Vec::new();
-        path.push(self.arrival_index);
-
         let mut current_index = self.arrival_index;
 
-        loop {
+        while current_index != self.departure_index {
+
+            path.push(current_index);
 
             current_index = (
                 current_index as i8 +
                 self.get_node_by_index(current_index)
                     .get_backward_movement()
             ) as usize;
-
-            if current_index == self.departure_index {
-                break;
-            }
-
-            path.push(current_index);
         }
 
         path.reverse();
+
         path
     }
 
