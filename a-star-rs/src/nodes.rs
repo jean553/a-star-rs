@@ -62,23 +62,33 @@ impl Nodes {
     /// Main research method
     pub fn research_path(&mut self) -> usize {
 
-        let mut final_node: Option<usize> = None;
+        let mut final_index: Option<usize> = None;
 
         self.generate_heuristics();
         self.generate_children_list();
 
-        while final_node.is_none() {
+        loop {
 
             self.update_open_list();
             self.generate_costs();
 
-            final_node = self.iterate();
+            final_index = self.iterate();
+
+            if self.iterate().is_some() {
+                break;
+            }
 
             self.generate_children_list();
             self.generate_backward_movement();
         }
         
-        final_node.unwrap()
+        let final_index = final_index.unwrap();
+
+        let arrival_index = self.arrival_index;
+        self.get_node_by_index(arrival_index)
+            .set_backward_movement(final_index as i8 - arrival_index as i8);
+
+        final_index
     }
 
     /// Generate the heuristics of every node from departure and arrival.
