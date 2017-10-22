@@ -591,8 +591,8 @@ mod tests {
 
         assert_eq!(
             nodes.research_path(),
-            28,
-            "unexpected final node index",
+            [14, 21, 28, 34],
+            "unexpected path",
         );
 
         assert_eq!(
