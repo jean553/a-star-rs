@@ -62,23 +62,33 @@ impl Nodes {
     /// Main research method
     pub fn research_path(&mut self) -> usize {
 
-        let mut final_node: Option<usize> = None;
+        let mut final_index: Option<usize> = None;
 
         self.generate_heuristics();
         self.generate_children_list();
 
-        while final_node.is_none() {
+        loop {
 
             self.update_open_list();
             self.generate_costs();
 
-            final_node = self.iterate();
+            final_index = self.iterate();
+
+            if self.iterate().is_some() {
+                break;
+            }
 
             self.generate_children_list();
             self.generate_backward_movement();
         }
         
-        final_node.unwrap()
+        let final_index = final_index.unwrap();
+
+        let arrival_index = self.arrival_index;
+        self.get_node_by_index(arrival_index)
+            .set_backward_movement(final_index as i8 - arrival_index as i8);
+
+        final_index
     }
 
     /// Generate the heuristics of every node from departure and arrival.
@@ -264,6 +274,7 @@ impl Nodes {
             let heuristic = node.get_heuristic();
 
             if heuristic == 1 {
+                self.current_index = *index;
                 return Some(*index);
             }
 
@@ -355,16 +366,32 @@ impl Nodes {
     pub fn generate_backward_movement(&mut self) {
 
         let current_index = self.current_index as i8;
-        let departure_index = self.departure_index as i8;
+        let mut selected_index = self.departure_index as i8;
 
-        // FIXME: #71 the function currently only set a backward movement
-        // different than 0 if the current index has the departure index
-        // in its children; the second part of the function must be defined
+        let children_list = self.children_list.clone();
+        if !children_list.contains(&self.departure_index) {
+
+            let mut minimum_cost = <u8>::max_value();
+
+            for child in children_list.iter() {
+
+                let child_node = self.get_node_by_index(*child);
+                let child_cost = child_node.get_cost();
+
+                if
+                    child_cost != 0 &&
+                    child_cost < minimum_cost
+                {
+                    minimum_cost = child_cost;
+                    selected_index = *child as i8;
+                }
+            }
+        }
 
         let index = self.current_index;
         let mut current_node = self.get_node_by_index(index);
 
-        let backward_movement = departure_index - current_index;
+        let backward_movement = selected_index - current_index;
         current_node.set_backward_movement(backward_movement);
     }
 
