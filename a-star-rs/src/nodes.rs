@@ -264,6 +264,7 @@ impl Nodes {
             let heuristic = node.get_heuristic();
 
             if heuristic == 1 {
+                self.current_index = *index;
                 return Some(*index);
             }
 
@@ -355,16 +356,32 @@ impl Nodes {
     pub fn generate_backward_movement(&mut self) {
 
         let current_index = self.current_index as i8;
-        let departure_index = self.departure_index as i8;
+        let mut selected_index = self.departure_index as i8;
 
-        // FIXME: #71 the function currently only set a backward movement
-        // different than 0 if the current index has the departure index
-        // in its children; the second part of the function must be defined
+        let children_list = self.children_list.clone();
+        if !children_list.contains(&self.departure_index) {
+
+            let mut minimum_cost = <u8>::max_value();
+
+            for child in children_list.iter() {
+
+                let child_node = self.get_node_by_index(*child);
+                let child_cost = child_node.get_cost();
+
+                if
+                    child_cost != 0 &&
+                    child_cost < minimum_cost
+                {
+                    minimum_cost = child_cost;
+                    selected_index = *child as i8;
+                }
+            }
+        }
 
         let index = self.current_index;
         let mut current_node = self.get_node_by_index(index);
 
-        let backward_movement = departure_index - current_index;
+        let backward_movement = selected_index - current_index;
         current_node.set_backward_movement(backward_movement);
     }
 
