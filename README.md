@@ -47,7 +47,41 @@ Generate documentation.
 cargo rustdoc -- --no-defaults
 ```
 
-## Usage
+## Simple usage
+
+Simply specifies the width and height of your map (in nodes).
+Set the departure index and the expected arrival index.
+
+The indices are set by row, like this:
+
+```
+0  1  2  3  4
+5  6  7  8  9
+10 11 12 13 14
+```
+
+In the following example, we build a map with a width of 5 nodes,
+a height of 10 nodes, the departure node is at the index 3
+and the arrival node is at the index 21.
+
+```rust
+let mut nodes = Nodes::new(5, 10, 3, 21);
+```
+
+Some nodes can be set as unusuable (that means the node cannot be part
+of the final path):
+
+```rust
+nodes.get_node_by_index(10).set_unusuable();
+```
+
+Use the function `research_path` to generate the path:
+
+```rust
+let path = nodes.generate_path();
+```
+
+## Implementation details
 
 ### Grid creation
 
