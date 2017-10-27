@@ -3,4 +3,8 @@ name = "a-star"
 version = "0.1.0"
 authors = ["Jean LELIEVRE <Jean.LELIEVRE@supinfo.com>"]
 
+[lib]
+name = "astar"
+crate-type = ["staticlib"]
+
 [dependencies]
