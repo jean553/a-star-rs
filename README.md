@@ -81,6 +81,27 @@ Use the function `research_path` to generate the path:
 let path = nodes.generate_path();
 ```
 
+## Public methods
+
+Public methods without name mangling for library usage:
+
+```rust
+#[no_mangle]
+pub fn get_path(
+    path: &mut [u8],
+    width: u8,
+    height: u8,
+    departure: u8,
+    arrival: u8,
+)
+
+#[no_mangle]
+pub fn get_positions(
+    width: u8,
+    index: u8,
+) -> (u8, u8)
+```
+
 ## Implementation details
 
 ### Grid creation

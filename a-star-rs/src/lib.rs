@@ -37,5 +37,27 @@ pub fn get_path(
     }
 }
 
+/// Returns positions of an index according to the width.
+///
+/// # Arguments:
+///
+/// * `width` - the width of the map
+/// * `index` - the source index
+///
+/// # Returns:
+///
+/// Tuple that contains the horizontal and vertical positions.
+#[no_mangle]
+pub fn get_positions(
+    width: u8,
+    index: u8,
+) -> (u8, u8) {
+
+    (
+        index % width,
+        index / width,
+    )
+}
+
 #[cfg(test)]
 mod tests;
