@@ -21,6 +21,8 @@ mod nodes;
 #[no_mangle]
 pub fn get_path(
     path: *const libc::uint8_t,
+    walls: *const libc::uint8_t,
+    walls_amount: libc::size_t,
     width: u8,
     height: u8,
     departure: u8,
@@ -34,12 +36,24 @@ pub fn get_path(
         )
     };
 
+    let walls: &[u8] = unsafe {
+        std::slice::from_raw_parts(
+            walls as *const u8,
+            walls_amount as usize,
+        )
+    };
+
     let mut nodes = nodes::Nodes::new(
         width,
         height,
         departure as usize,
         arrival as usize,
     );
+
+    for wall in walls {
+        nodes.get_node_by_index(*wall as usize)
+            .set_unusuable();
+    }
 
     let path_indices = nodes.research_path();
 
