@@ -16,11 +16,6 @@ Library that implements A-star algorithm.
     * [Iteration](#iteration)
     * [Backward movement generation](#backward-movement-generation)
 
-## Ongoing tasks
-
-* generate the path from the arrival to the departure
-once the arrival has been found
-
 ## Development
 
 Start the docker container.
